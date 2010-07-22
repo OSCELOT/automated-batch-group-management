@@ -1,0 +1,249 @@
+<!--
+ * LOI Community License Notice
+ *
+ * The contents of this file are subject to the LOI Community License 
+ * Version 1.0 (the License); you may not use this file except in compliance 
+ * with the License. A copy of the License is available at 
+ * http://www.learningobjects.com/community.
+ * 
+ * The Original Code is the ABGM Tool. The Initial Developer of 
+ * the Original Code is Learning Objects, Inc. 
+ *
+ * Portions created by Initial Developer are Copyright(C) Learning 
+ * Objects, Inc. All Rights Reserved.
+ * 
+ * Contributor(s):
+-->
+
+<project name="ABGM Tool" default="fullbuild" basedir=".">
+    <description>
+                ABGM Tool
+                $Id: build.xml 4494 2006-04-11 01:34:54Z tmoore $
+    </description>
+
+    <property environment="env" />
+
+    <!-- set global properties for this build -->
+    <property name="shortname" value="abgm" />
+    <property name="longname" value="ABGM Tool" />
+    <property name="label" value="dev" />
+
+    <property name="build" location="_classes_" />
+    <property name="dist" location="_dist_" />
+    <property name="docs" location="_api_" />
+    <property name="jsptemp" location="_jsptemp_" />
+    <property name="webapp" location="_webapp_" />
+
+    <property name="src" location="src/java" />
+    <property name="resources" location="resources" />
+    <property name="distlib" location="distlib" />
+
+    <property name="version" value="1.1.2" />
+    <property name="dist.name" value="${shortname}-${version}.${label}" />
+    <property name="srcdist.zip" location="${dist}/${dist.name}-src.zip" />
+
+    <path id="build.classpath">
+        <fileset dir="distlib">
+            <include name="**/*.jar" />
+        </fileset>
+        <fileset dir="lib">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <!--A fileset of all files that are used to build the project and should be used for uptodate checks-->
+    <fileset dir="." id="sourcefiles">
+        <include name="src/**/*.java" />
+        <include name="src/**/*.jsp" />
+        <include name="src/**/*.tag" />
+        <include name="src/**/*.xml" />
+        <include name="build.xml" />
+    </fileset>
+
+    <target name="clean">
+        <delete file="${srcdist.zip}" />
+        <delete dir="${build}" />
+        <delete dir="${dist}" />
+        <delete dir="${docs}" />
+        <delete dir="${jsptemp}" />
+    </target>
+
+    <target name="compile" depends="-require-bb-platform">
+        <mkdir dir="${build}" />
+        <javac debug="true"
+               deprecation="on"
+               debuglevel="lines,vars,source"
+               target="1.4"
+               destdir="${build}"
+               source="1.4">
+            <src path="${src}" />
+            <include name="com/learningobjects/**" />
+            <classpath refid="build.classpath" />
+        </javac>
+        <copy toDir="${build}">
+            <fileset dir="src">
+                <include name="resources/**" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="dist" depends="compile" description="Build a Bblock war file">
+        <mkdir dir="${dist}" />
+        <war destfile="${dist}/${dist.name}.war" webxml="src/webinf/web.xml">
+            <classes dir="${build}" />
+            <lib dir="${distlib}" />
+            <fileset dir="src/jsp" />
+            <fileset dir="src/static_web" />
+            <fileset dir="${basedir}" includes="LEGAL/**" />
+            <webinf dir="src/webinf">
+                <include name="**/*" />
+                <exclude name="web.xml" />
+                <!-- included by the webxml attribute -->
+            </webinf>
+            <manifest>
+                <attribute name="Copyright"
+                           value="Copyright 2004-2006 Learning Objects, Inc." />
+                <attribute name="Build-Version"
+                           value="$Id: build.xml 4494 2006-04-11 01:34:54Z tmoore $" />
+                <attribute name="Build-Label" value="${label}" />
+            </manifest>
+        </war>
+    </target>
+
+    <!-- ================================= 
+          target: srcdist              
+         ================================= -->
+    <target name="srcdist" description="Build a source ZIP, excluding Bb JARs">
+        <mkdir dir="${dist}" />
+        <zip destfile="${srcdist.zip}" basedir="${basedir}">
+            <exclude name="**/.svn" />
+            <exclude name="**/_*_/**" />
+            <exclude name="lib/bb-*jar" />
+        </zip>
+    </target>
+
+    <target name="api" description="Build and archive javadoc">
+        <javadoc packagenames="com.learningobjects.*"
+                 sourcepath="${src}"
+                 destdir="${docs}"
+                 windowtitle="${longname}"
+                 use="true"
+                 access="private">
+            <classpath refid="build.classpath" />
+        </javadoc>
+        <mkdir dir="${dist}" />
+        <zip destfile="${dist}/${dist.name}-api.zip">
+            <fileset dir="${docs}" />
+        </zip>
+    </target>
+
+    <target name="fullbuild"
+            description="Build everything"
+            depends="clean, jspc, api, srcdist" />
+
+    <target name="jspc"
+            depends="dist,-test-jspc,-warn-if-jspc-disabled,-require-bb-taglibs"
+            description="Compile JSP files"
+            if="jspc.enabled">
+        <property name="uriroot" location="${jsptemp}/webapp" />
+        <property name="jspsrc" location="${jsptemp}/src" />
+        <property name="jspclasses" location="${jsptemp}/classes" />
+
+
+        <taskdef classname="org.apache.jasper.JspC" name="jasper2">
+            <classpath id="jspc.classpath">
+                <path refid="build.classpath" />
+                <fileset dir="${env.TOMCAT_HOME}/server/lib">
+                    <include name="*.jar" />
+                </fileset>
+                <fileset dir="${env.TOMCAT_HOME}/common/lib">
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
+        </taskdef>
+
+        <unwar src="${dist}/${dist.name}.war" dest="${uriroot}" />
+
+        <mkdir dir="${jspsrc}" />
+        <jasper2 package="com.leaningobjects.jsp"
+                 validateXml="false"
+                 uriroot="${uriroot}"
+                 outputDir="${jspsrc}" />
+
+        <echo message="COMPILING JSP's JAVA..." />
+
+        <mkdir dir="${jspclasses}" />
+
+        <javac destdir="${jspclasses}"
+               optimize="off"
+               debug="on"
+               failonerror="true"
+               srcdir="${jspsrc}">
+            <classpath>
+                <path refid="jspc.classpath" />
+                <pathelement location="${build}" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="runTarget"
+            depends="compile"
+            description="Run a single class specified in toRun">
+        <java classname="${toRun}" failonerror="true" fork="true">
+            <classpath refid="build.classpath" />
+            <classpath>
+                <pathelement path="${build}" />
+            </classpath>
+            <arg line="${args}" />
+        </java>
+    </target>
+
+
+
+    <!-- - - - - - - - - - - - - - - - - -
+          target: -test-jspc
+         - - - - - - - - - - - - - - - - - -->
+    <target name="-test-jspc">
+        <condition property="jspc.enabled">
+            <and>
+                <available file="${env.TOMCAT_HOME}" type="dir" />
+                <available file="${env.TOMCAT_HOME}/server/lib" type="dir" />
+                <available file="${env.TOMCAT_HOME}/common/lib" type="dir" />
+            </and>
+        </condition>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - -
+          target: -warn-if-jspc-disabled
+         - - - - - - - - - - - - - - - - - -->
+    <target name="-warn-if-jspc-disabled" unless="jspc.enabled">
+        <echo level="warning">To enable JSP compilation, set the TOMCAT_HOME environment variable to the installation location of Tomcat 4.1 or later</echo>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - -
+          target: -require-bb-platform
+         - - - - - - - - - - - - - - - - - -->
+    <target name="-require-bb-platform">
+        <property name="lib.dir" location="lib" />
+        <available file="${lib.dir}/bb-platform.jar"
+                   type="file"
+                   property="bb-platform-available" />
+        <fail unless="bb-platform-available">
+            Please copy bb-platform.jar from your blackboard/systemlib directory into ${lib.dir}.
+        </fail>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - -
+          target: -require-bb-taglibs
+         - - - - - - - - - - - - - - - - - -->
+    <target name="-require-bb-taglibs" if="jspc.enabled">
+        <property name="lib.dir" location="lib" />
+        <available file="${lib.dir}/bb-taglibs.jar"
+                   type="file"
+                   property="bb-taglibs-available" />
+        <fail unless="bb-taglibs-available">
+            Please copy bb-taglibs.jar from your blackboard/systemlib directory into ${lib.dir}.
+        </fail>
+    </target>
+
+</project>

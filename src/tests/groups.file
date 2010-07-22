@@ -1,0 +1,17 @@
+# This is an example group definition file.
+# Comments begin with a hash-mark, and extend to the end of the line
+# Blank lines are ignored       Fields are delimeted with pipe symbols and whitespace is preserved.
+# Identifiers are case-sensitive
+#course_id|group_id|name|description|available|discussion|collaboration|email|file
+# $Id: groups.file 2525 2005-01-07 21:32:39Z rvawter $
+
+ASC.ADVISING|FRESHMEN-ASC.ADVISING|Freshmen|Freshmen in Arts and Sciences|Y|N|N|N|N
+ASC.ADVISING|SOPHOMORES-ASC.ADVISING|Sophomores|Sophomores in Arts and Sciences|Y|N|N|N|N
+
+#The following is duplicated, but will only come out once
+CHEM.ASC.ADVISING|AJONES2-CHEM.ASC.ADVISING|Advisor  Alfred Jones|Alfred Joness Advisees|Y|Y|Y|Y|Y
+CHEM.ASC.ADVISING|AJONES2-CHEM.ASC.ADVISING|   Ima Duplicate  |Alfred Joness Advisees|Y|Y|Y|Y|Y
+
+
+CHEM.ASC.ADVISING|SSMITH3-CHEM.ASC.ADVISING|Advisor  Sally Smith|Sally Smiths Advisees|Y|Y|Y|Y|Y
+

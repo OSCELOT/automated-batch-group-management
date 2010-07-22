@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+    "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+<web-app>
+
+  <servlet>
+    <servlet-name>BootstrapServlet</servlet-name>
+    <servlet-class>com.learningobjects.community.abgm.servlet.BootstrapServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>ConfigServlet</servlet-name>
+    <servlet-class>com.learningobjects.community.abgm.servlet.ConfigServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+     <servlet-name>ConfigServlet</servlet-name>
+     <url-pattern>/ConfigServlet</url-pattern>
+  </servlet-mapping>  
+  
+	<taglib>
+		<taglib-uri>/bbUI</taglib-uri>
+		<taglib-location>/WEB-INF/taglibs/bbUI.tld</taglib-location>
+	</taglib>
+	
+	<taglib>
+		<taglib-uri>/bbData</taglib-uri>
+		<taglib-location>/WEB-INF/taglibs/bbData.tld</taglib-location>
+	</taglib>
+
+</web-app>

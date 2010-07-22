@@ -1,0 +1,49 @@
+<manifest>
+    <plugin>
+        <name value="ABGM Tool"/>
+        <handle value="abgm"/>
+    <description value="ABGM Tool"/>
+        <version value="1.1.2"/>
+        <requires>
+            <bbversion value="7.0.0"/>
+        </requires>
+        <vendor>
+            <id value="lobj"/>
+            <name value="Learning Objects, Inc."/>
+            <url value="http://www.learningobjects.com"/>
+            <description value="Please visit our website at htt://www.learningobjects.com to learn more."/>
+        </vendor>
+        <http-actions></http-actions>    
+    <application-defs>
+      <application handle="lobj-abgm" type="shared" use-ssl="false" name="ABGM Tool" can-allow-guest="true"
+       small-icon="" large-icon="">
+        <description lang="en_US">Application installed as part of ABGM Tool</description>
+        <links>
+          <link>
+            <type value="system_tool"/>
+            <name value="Manage ABGM Tool"/>
+            <url value="manage.jsp" />
+            <description value="Manage ABGM Tool" />
+            <icons>
+              <listitem value="images/abgm.png"/>
+            </icons>
+          </link>
+        </links>
+      </application>
+    </application-defs>
+    <permissions>       
+       <permission type="java.io.FilePermission" name="&amp;lt;&amp;lt;ALL FILES&amp;gt;&amp;gt;" actions="read,write,delete,execute"/>
+       <permission type="java.util.PropertyPermission" name="*" actions="read,write" /> 
+       <permission type="attribute" name="user.authinfo" actions="get"/>
+       <permission type="attribute" name="user.personalinfo" actions="get"/>
+       <permission type="java.util.logging.LoggingPermission" name="control" actions="" /> 
+       <permission type="java.lang.RuntimePermission" name="accessClassInPackage.sun.misc" actions=""/>
+       <permission type="java.lang.RuntimePermission" name="setFactory" actions=""/>
+       <permission type="java.lang.RuntimePermission" name="setContextClassLoader" actions=""/>   
+       <permission type="java.security.SecurityPermission" name="*" />
+       <permission type="java.net.SocketPermission" name="*" actions="connect,resolve"/>
+       <permission type="persist" name="group" actions="create,modify,delete"/>
+       <permission type="persist" name="groupmembership" actions="create,modify,delete"/>
+    </permissions>
+  </plugin>
+</manifest>

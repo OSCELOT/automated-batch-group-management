@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="lib" path="distlib/commons-lang-2.0.jar"/>
+	<classpathentry kind="lib" path="distlib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="distlib/quartz-1.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/bb-platform.jar"/>
+	<classpathentry kind="lib" path="lib/bb-taglibs.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="_classes_"/>
+</classpath>
