@@ -31,7 +31,7 @@
         <%= (Exception)request.getAttribute("exception") %>
       <%}%>
       <br>
-      <a href="manage.jsp"><img align="right" src="/images/ci/formbtns/ok_off.gif" border="0" alt="ok"></a>
+      <a href="manage.jsp"><img align="right" src="/common/ok_off.gif" border="0" alt="ok"></a>
     <blockquote>
   </bbUI:docTemplate>
 </bbData:context>
