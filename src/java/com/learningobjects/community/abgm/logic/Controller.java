@@ -96,8 +96,8 @@ public class Controller {
 		try {
 			out = new FileOutputStream(lockFile);
 			lock = out.getChannel().lock();
-		} catch (IOException e) {
-			throw new ControllerException("Could not lock config direrctory", e);
+		} catch (Exception e) {
+			throw new ControllerException("Could not lock " + lockFile, e);
 		}
 		try {
 			if (!groupsBak.exists() || !membershipsBak.exists()) {
