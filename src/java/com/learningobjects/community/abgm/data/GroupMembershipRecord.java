@@ -12,58 +12,54 @@
  * Contributor(s):
  *
  */
-
 package com.learningobjects.community.abgm.data;
 
 public class GroupMembershipRecord {
 
-  private String _externalCourseKey = "";
-  private String _externalGroupKey = "";
-  private String _externalUserKey = "";
+	private String _externalCourseKey = "";
+	private String _externalGroupKey = "";
+	private String _externalUserKey = "";
 
-  public String getExternalGroupKey() {
-    return _externalGroupKey;
-  }
+	public String getExternalGroupKey() {
+		return _externalGroupKey;
+	}
 
-  public void setExternalGroupKey(String externalGroupKey) {
-    _externalGroupKey = externalGroupKey;
-  }
+	public void setExternalGroupKey(String externalGroupKey) {
+		_externalGroupKey = externalGroupKey;
+	}
 
-  public String getExternalUserKey() {
-    return _externalUserKey;
-  }
+	public String getExternalUserKey() {
+		return _externalUserKey;
+	}
 
-  public void setExternalUserKey(String externalUserKey) {
-    _externalUserKey = externalUserKey;
-  }
-  
-  public String getExternalCourseKey() {
-	  return _externalCourseKey;
-  }
-  
-  public void setExternalCourseKey(String externalCourseKey) {
-	  _externalCourseKey = externalCourseKey;
-  }
-	  
+	public void setExternalUserKey(String externalUserKey) {
+		_externalUserKey = externalUserKey;
+	}
 
-  public String toString() {
-	  return (
-  "_externalCourseKey = "+_externalCourseKey +"\n"+
-  "_externalGroupKey = "+_externalGroupKey +"\n"+
-  "_externalUserKey = "+_externalUserKey
-  );
+	public String getExternalCourseKey() {
+		return _externalCourseKey;
+	}
 
-  }
-  
-  public boolean equals(Object o) {
-	  return ((o instanceof GroupMembershipRecord) && (((GroupMembershipRecord)o)._externalGroupKey.equals(_externalGroupKey))
-	  && (((GroupMembershipRecord)o)._externalCourseKey.equals(_externalCourseKey))
-	  && (((GroupMembershipRecord)o)._externalUserKey.equals(_externalUserKey))
-	  );
-  }
-  
-  public int hashCode() {
-	  return (getClass().getName() + _externalCourseKey + "^|^" + _externalGroupKey + "^|^" + _externalUserKey).hashCode();
-  }
+	public void setExternalCourseKey(String externalCourseKey) {
+		_externalCourseKey = externalCourseKey;
+	}
+
+	public String toString() {
+		return ("_externalCourseKey = " + _externalCourseKey + "\n" + "_externalGroupKey = " + _externalGroupKey + "\n"
+				+ "_externalUserKey = " + _externalUserKey);
+
+	}
+
+	public boolean equals(Object o) {
+		return ((o instanceof GroupMembershipRecord)
+				&& (((GroupMembershipRecord) o)._externalGroupKey.equals(_externalGroupKey))
+				&& (((GroupMembershipRecord) o)._externalCourseKey.equals(_externalCourseKey)) && (((GroupMembershipRecord) o)._externalUserKey
+				.equals(_externalUserKey)));
+	}
+
+	public int hashCode() {
+		return (getClass().getName() + _externalCourseKey + "^|^" + _externalGroupKey + "^|^" + _externalUserKey)
+				.hashCode();
+	}
 
 }

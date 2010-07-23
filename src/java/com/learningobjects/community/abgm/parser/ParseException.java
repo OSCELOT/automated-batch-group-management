@@ -12,13 +12,12 @@
  * Contributor(s):
  *
  */
-
 package com.learningobjects.community.abgm.parser;
 
 public class ParseException extends Exception {
 
-  public ParseException(String msg) {
-	  super(msg);
-  }
+	public ParseException(String msg) {
+		super(msg);
+	}
 
 }

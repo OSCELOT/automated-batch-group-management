@@ -12,16 +12,21 @@
  * Contributor(s):
  *
  */
-
 package com.learningobjects.community.abgm.logic;
 
-/** An Exception thrown by Controller when it is unable to complete a task. <br/>
-	Copyright 2005 Learning Objects, Inc.<br/>
-	$Id: ControllerException.java 4608 2006-06-12 15:50:11Z dhamner $
-	
-	@version $Rev: 4608 $
-*/
+/**
+ * An Exception thrown by Controller when it is unable to complete a task. <br/>
+ * Copyright 2005 Learning Objects, Inc.<br/>
+ * $Id: ControllerException.java 4608 2006-06-12 15:50:11Z dhamner $
+ * 
+ * @version $Rev: 4608 $
+ */
 public class ControllerException extends Exception {
-	public ControllerException(String msg) {super(msg);}
-	public ControllerException(String msg, Throwable cause) {super(msg,cause);}
+	public ControllerException(String msg) {
+		super(msg);
+	}
+
+	public ControllerException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 }

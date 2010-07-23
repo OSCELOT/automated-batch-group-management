@@ -12,33 +12,30 @@
  * Contributor(s):
  *
  */
-
 package com.learningobjects.community.abgm.container;
+
 import java.io.*;
 import java.util.logging.*;
 
 import com.learningobjects.community.abgm.config.SystemProperties;
 
 /**
- *  A source for Loggers that have been configured to the user's wishes. The
- *  Loggers will be in the "com.learningobjects.community.abgm" domain, so any sub-domains
- *  will also be pre-configured. <br/>
- *  On startup, we will attempt to use or create the directory in the
- *  SystemProperty "logFileLocation". Failing that, we will log to System.out
- *  until the log directory is changed. <br/>
- *  Copyright 2005 Learning Objects, Inc.. <br/>
- *  $Id: LoggerFactory.java 4608 2006-06-12 15:50:11Z dhamner $
- *
- * @version    $Rev: 4608 $
+ * A source for Loggers that have been configured to the user's wishes. The Loggers will be in the
+ * "com.learningobjects.community.abgm" domain, so any sub-domains will also be pre-configured. <br/>
+ * On startup, we will attempt to use or create the directory in the SystemProperty "logFileLocation". Failing that, we
+ * will log to System.out until the log directory is changed. <br/>
+ * Copyright 2005 Learning Objects, Inc.. <br/>
+ * $Id: LoggerFactory.java 4608 2006-06-12 15:50:11Z dhamner $
+ * 
+ * @version $Rev: 4608 $
  */
 public class LoggerFactory {
 	private static Logger myLogger;
 
-
 	/**
-	 *  Gets a Logger.
-	 *
-	 * @return    A configured Logger
+	 * Gets a Logger.
+	 * 
+	 * @return A configured Logger
 	 */
 	public static Logger getLogger() {
 		if (myLogger != null) {
@@ -49,8 +46,7 @@ public class LoggerFactory {
 		}
 	}
 
-
-	/**  Initialize the LoggerFactory */
+	/** Initialize the LoggerFactory */
 	private static synchronized void initialize() {
 		if (myLogger != null) {
 			return;
@@ -84,15 +80,13 @@ public class LoggerFactory {
 
 	}
 
-
 	/**
-	 *  Set the directory that the logs should be written to. The File must already
-	 *  exist, and be writable, for this function to have effect.
-	 *
-	 * @param  dir              The new directory to store logs in
-	 * @return                  <code>true</code> iff the logging directory was
-	 *      updated.
-	 * @exception  IOException  Description of the Exception
+	 * Set the directory that the logs should be written to. The File must already exist, and be writable, for this
+	 * function to have effect.
+	 * 
+	 * @param dir The new directory to store logs in
+	 * @return <code>true</code> iff the logging directory was updated.
+	 * @exception IOException Description of the Exception
 	 */
 	public static synchronized boolean setLoggingDirectory(File dir) throws IOException {
 		if ((dir != null) && dir.isDirectory() && dir.canWrite()) {

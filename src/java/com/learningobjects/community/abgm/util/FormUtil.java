@@ -12,25 +12,24 @@
  * Contributor(s):
  *
  */
-
 package com.learningobjects.community.abgm.util;
 
 public class FormUtil {
 
-  public static String checked(String a, String b) {
-    if (a.equals(b)) {
-      return "checked";
-    } else {
-      return "";
-    }
-  }
+	public static String checked(String a, String b) {
+		if (a.equals(b)) {
+			return "checked";
+		} else {
+			return "";
+		}
+	}
 
-  public static String selected(String a, String b) {
-    if (a.equals(b)) {
-      return "selected";
-    } else {
-      return "";
-    }
-  }
+	public static String selected(String a, String b) {
+		if (a.equals(b)) {
+			return "selected";
+		} else {
+			return "";
+		}
+	}
 
 }

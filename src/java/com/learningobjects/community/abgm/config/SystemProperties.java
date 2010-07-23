@@ -12,7 +12,6 @@
  * Contributor(s):
  *
  */
-
 package com.learningobjects.community.abgm.config;
 
 import java.util.*;
@@ -22,33 +21,34 @@ import com.learningobjects.community.abgm.container.LoggerFactory;
 
 public class SystemProperties extends Properties {
 
-  private static SystemProperties _systemProperties = null;
-  private String _systemPropertiesPath = null;
+	private static SystemProperties _systemProperties = null;
+	private String _systemPropertiesPath = null;
 
-  private SystemProperties() {}
+	private SystemProperties() {
+	}
 
-  public static synchronized SystemProperties getInstance() {
-    if (_systemProperties == null) {
-      _systemProperties = new SystemProperties();
-    }
-    return _systemProperties;
-  }
+	public static synchronized SystemProperties getInstance() {
+		if (_systemProperties == null) {
+			_systemProperties = new SystemProperties();
+		}
+		return _systemProperties;
+	}
 
-  public void init(String systemPropertiesPath) throws FileNotFoundException, IOException  {
-    _systemPropertiesPath = systemPropertiesPath;
-    load();
-  }
+	public void init(String systemPropertiesPath) throws FileNotFoundException, IOException {
+		_systemPropertiesPath = systemPropertiesPath;
+		load();
+	}
 
-  public synchronized void load() throws FileNotFoundException, IOException {
-    FileInputStream fis = new FileInputStream(_systemPropertiesPath);
-    load(fis);
-    fis.close();
-  }
+	public synchronized void load() throws FileNotFoundException, IOException {
+		FileInputStream fis = new FileInputStream(_systemPropertiesPath);
+		load(fis);
+		fis.close();
+	}
 
-  public synchronized void store() throws FileNotFoundException, IOException {
-    FileOutputStream fos = new FileOutputStream(_systemPropertiesPath);
-    store(fos, null);
-    fos.close();
-  }
+	public synchronized void store() throws FileNotFoundException, IOException {
+		FileOutputStream fos = new FileOutputStream(_systemPropertiesPath);
+		store(fos, null);
+		fos.close();
+	}
 
 }
