@@ -188,13 +188,7 @@ public class GroupMembershipParser {
 		System.out.println("Starting");
 		for (GroupMembershipRecord gr : s) {
 			System.out.println(gr);
-			/*
-			 * final GroupRecord found = gp.findGroupRecord(gr.getCourseId(), gr.getExternalGroupKey()); if ((found == gr) &&
-			 * found.equals(gr)) { System .out.println("Successfully found this GroupRecord in the parser"); } else {
-			 * System.out.println("Did NOT find this GroupRecord in the parser"); }
-			 */
 			System.out.println();
-
 		}
 		System.out.println("Done");
 	}
