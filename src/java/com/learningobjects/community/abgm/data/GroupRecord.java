@@ -100,18 +100,18 @@ public class GroupRecord {
 
 	@Override
 	public String toString() {
-		return ("_externalGroupKey = " + _externalGroupKey + "\n" + "_title = " + _title + "\n" + "_description = "
+		return "_externalGroupKey = " + _externalGroupKey + "\n" + "_title = " + _title + "\n" + "_description = "
 				+ _description + "\n" + "_courseId = " + _courseId + "\n" + "_isAvailable = " + _isAvailable + "\n"
 				+ "_isChatRoomAvailable = " + _isChatRoomAvailable + "\n" + "_isDiscussionBoardAvailable = "
 				+ _isDiscussionBoardAvailable + "\n" + "_isEmailAvailable = " + _isEmailAvailable + "\n"
-				+ "_isTransferAreaAvailable = " + _isTransferAreaAvailable);
+				+ "_isTransferAreaAvailable = " + _isTransferAreaAvailable;
 
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		return ((o instanceof GroupRecord) && (((GroupRecord) o)._externalGroupKey.equals(_externalGroupKey)) && (((GroupRecord) o)._courseId
-				.equals(_courseId)));
+		return o instanceof GroupRecord && ((GroupRecord) o)._externalGroupKey.equals(_externalGroupKey)
+				&& ((GroupRecord) o)._courseId.equals(_courseId);
 	}
 
 	@Override

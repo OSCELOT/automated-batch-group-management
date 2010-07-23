@@ -16,6 +16,7 @@ package com.learningobjects.community.abgm.container;
 
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -126,13 +127,11 @@ public class BbGroupManager {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(store));
 			out.writeInt(1);
 
-			final Set<Map.Entry<GroupRecord,Id>> entries = groupMap.entrySet();
+			final Set<Map.Entry<GroupRecord, Id>> entries = groupMap.entrySet();
 
 			out.writeInt(entries.size());
 
-			for (final Iterator<Map.Entry<GroupRecord,Id>> i = entries.iterator(); i.hasNext();) {
-				final Map.Entry<GroupRecord,Id> e = i.next();
-
+			for (Entry<GroupRecord, Id> e : entries) {
 				final GroupRecord key = e.getKey();
 				final Id id = e.getValue();
 

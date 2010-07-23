@@ -19,7 +19,8 @@ package com.learningobjects.community.abgm.logic;
 
 import java.io.*;
 import java.nio.channels.FileLock;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -135,8 +136,7 @@ public class Controller {
 			// Let's see if there are any new or old groups.
 			final Set<GroupRecord> deletedGroupRecords = new HashSet<GroupRecord>(gpOld.getAllGroupRecords());
 			deletedGroupRecords.removeAll(gpNew.getAllGroupRecords());
-			for (final Iterator<GroupRecord> i = deletedGroupRecords.iterator(); i.hasNext();) {
-				final GroupRecord gr = i.next();
+			for (GroupRecord gr : deletedGroupRecords) {
 				logger.info("Deleting group " + gr.getExternalGroupKey());
 				try {
 					final Group toDelete = manager.getGroup(gr, false);
@@ -154,8 +154,7 @@ public class Controller {
 			// We'll have the updated "retained" GroupRecords in the set
 			final Set<GroupRecord> retainedGroupRecords = new HashSet<GroupRecord>(gpNew.getAllGroupRecords());
 			retainedGroupRecords.retainAll(gpOld.getAllGroupRecords());
-			for (final Iterator<GroupRecord> i = retainedGroupRecords.iterator(); i.hasNext();) {
-				final GroupRecord gr = i.next();
+			for (GroupRecord gr : retainedGroupRecords) {
 				logger.info("Retained group " + gr.getExternalGroupKey());
 				final Group theGroup;
 				try {
@@ -172,12 +171,13 @@ public class Controller {
 					logger.log(Level.WARNING, "Unable to update " + gr.getExternalGroupKey(), e);
 					continue;
 				}
-				final Set<GroupMembershipRecord> membershipRecordsOld = gmpOld.findGroupMembershipRecordsByGroup(gr.getExternalGroupKey());
-				final Set<GroupMembershipRecord> membershipRecordsNew = gmpNew.findGroupMembershipRecordsByGroup(gr.getExternalGroupKey());
+				final Set<GroupMembershipRecord> membershipRecordsOld = gmpOld.findGroupMembershipRecordsByGroup(gr
+						.getExternalGroupKey());
+				final Set<GroupMembershipRecord> membershipRecordsNew = gmpNew.findGroupMembershipRecordsByGroup(gr
+						.getExternalGroupKey());
 				final Set<GroupMembershipRecord> toAdd = new HashSet<GroupMembershipRecord>(membershipRecordsNew);
 				toAdd.removeAll(membershipRecordsOld);
-				for (final Iterator<GroupMembershipRecord> j = toAdd.iterator(); j.hasNext();) {
-					final GroupMembershipRecord gmr = j.next();
+				for (GroupMembershipRecord gmr : toAdd) {
 					logger.info("Adding user  " + gmr.getExternalUserKey() + " to " + gr.getExternalGroupKey());
 					try {
 						manager.addMember(theGroup, gmr.getExternalUserKey());
@@ -191,8 +191,7 @@ public class Controller {
 				}
 				final Set<GroupMembershipRecord> toDelete = new HashSet<GroupMembershipRecord>(membershipRecordsOld);
 				toDelete.removeAll(membershipRecordsNew);
-				for (final Iterator<GroupMembershipRecord> j = toDelete.iterator(); j.hasNext();) {
-					final GroupMembershipRecord gmr = j.next();
+				for (GroupMembershipRecord gmr : toDelete) {
 					logger.info("Deleting user  " + gmr.getExternalUserKey() + " from " + gr.getExternalGroupKey());
 					try {
 						manager.removeMember(theGroup, gmr.getExternalUserKey());
@@ -205,8 +204,7 @@ public class Controller {
 			// Now, add the new groups
 			final Set<GroupRecord> addedGroupRecords = new HashSet<GroupRecord>(gpNew.getAllGroupRecords());
 			addedGroupRecords.removeAll(gpOld.getAllGroupRecords());
-			for (final Iterator<GroupRecord> i = addedGroupRecords.iterator(); i.hasNext();) {
-				final GroupRecord gr = i.next();
+			for (GroupRecord gr : addedGroupRecords) {
 				logger.info("Adding group " + gr.getExternalGroupKey());
 				final Group theGroup;
 				try {
@@ -218,9 +216,9 @@ public class Controller {
 					logger.log(Level.WARNING, "Unable to delete " + gr.getExternalGroupKey(), e);
 					continue;
 				}
-				final Set<GroupMembershipRecord> membershipRecords = gmpNew.findGroupMembershipRecordsByGroup(gr.getExternalGroupKey());
-				for (final Iterator<GroupMembershipRecord> j = membershipRecords.iterator(); j.hasNext();) {
-					final GroupMembershipRecord gmr = j.next();
+				final Set<GroupMembershipRecord> membershipRecords = gmpNew.findGroupMembershipRecordsByGroup(gr
+						.getExternalGroupKey());
+				for (GroupMembershipRecord gmr : membershipRecords) {
 					try {
 						manager.addMember(theGroup, gmr.getExternalUserKey());
 					} catch (ValidationException e) {
@@ -298,8 +296,7 @@ public class Controller {
 			throw new ControllerException("Malformed file", e);
 		}
 		final BbGroupManager manager = getBbGroupManager();
-		for (final Iterator<GroupRecord> i = gp.getAllGroupRecords().iterator(); i.hasNext();) {
-			final GroupRecord gr = i.next();
+		for (GroupRecord gr : gp.getAllGroupRecords()) {
 			final Group theGroup;
 			try {
 				theGroup = manager.getGroup(gr);
@@ -311,10 +308,10 @@ public class Controller {
 				continue;
 			}
 			logger.info("Created group " + theGroup.getId().toExternalString());
-			final Set<GroupMembershipRecord> membershipRecords = gmp.findGroupMembershipRecordsByGroup(gr.getExternalGroupKey());
+			final Set<GroupMembershipRecord> membershipRecords = gmp.findGroupMembershipRecordsByGroup(gr
+					.getExternalGroupKey());
 			logger.info("I have " + membershipRecords.size() + " membership records for group " + gr.getExternalGroupKey());
-			for (final Iterator<GroupMembershipRecord> j = membershipRecords.iterator(); j.hasNext();) {
-				final GroupMembershipRecord gmr = j.next();
+			for (GroupMembershipRecord gmr : membershipRecords) {
 				try {
 					manager.addMember(theGroup, gmr.getExternalUserKey());
 				} catch (ValidationException e) {

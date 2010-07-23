@@ -46,17 +46,17 @@ public class GroupMembershipRecord {
 
 	@Override
 	public String toString() {
-		return ("_externalCourseKey = " + _externalCourseKey + "\n" + "_externalGroupKey = " + _externalGroupKey + "\n"
-				+ "_externalUserKey = " + _externalUserKey);
+		return "_externalCourseKey = " + _externalCourseKey + "\n" + "_externalGroupKey = " + _externalGroupKey + "\n"
+				+ "_externalUserKey = " + _externalUserKey;
 
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		return ((o instanceof GroupMembershipRecord)
-				&& (((GroupMembershipRecord) o)._externalGroupKey.equals(_externalGroupKey))
-				&& (((GroupMembershipRecord) o)._externalCourseKey.equals(_externalCourseKey)) && (((GroupMembershipRecord) o)._externalUserKey
-				.equals(_externalUserKey)));
+		return o instanceof GroupMembershipRecord
+				&& ((GroupMembershipRecord) o)._externalGroupKey.equals(_externalGroupKey)
+				&& ((GroupMembershipRecord) o)._externalCourseKey.equals(_externalCourseKey)
+				&& ((GroupMembershipRecord) o)._externalUserKey.equals(_externalUserKey);
 	}
 
 	@Override

@@ -75,8 +75,8 @@ public class GroupParser {
 	public Set<GroupRecord> getAllGroupRecords() {
 		final Set<GroupRecord> toReturn = new HashSet<GroupRecord>();
 
-		for (final Iterator<Set<GroupRecord>> i = byCourse.values().iterator(); i.hasNext();) {
-			toReturn.addAll(i.next());
+		for (Set<GroupRecord> set : byCourse.values()) {
+			toReturn.addAll(set);
 		}
 
 		return Collections.unmodifiableSet(toReturn);
@@ -97,9 +97,7 @@ public class GroupParser {
 		compareTo.setCourseId(courseId);
 		compareTo.setExternalGroupKey(groupId);
 
-		for (final Iterator<GroupRecord> i = lookup.iterator(); i.hasNext();) {
-			final GroupRecord theRecord = i.next();
-
+		for (GroupRecord theRecord : lookup) {
 			if (theRecord.equals(compareTo)) {
 				return theRecord;
 			}
@@ -140,7 +138,7 @@ public class GroupParser {
 			final Matcher lineMatcher = linePattern.matcher(aLine);
 			final Matcher commentMatcher = commentPattern.matcher(aLine);
 
-			if ((aLine.length() == 0) || commentMatcher.matches()) {
+			if (aLine.length() == 0 || commentMatcher.matches()) {
 				// Do nothing
 			} else if (lineMatcher.matches()) {
 				final GroupRecord aRecord = new GroupRecord();
@@ -203,13 +201,11 @@ public class GroupParser {
 		s = gp.getAllGroupRecords();
 
 		System.out.println("Starting");
-		for (final Iterator<GroupRecord> i = s.iterator(); i.hasNext();) {
-			final GroupRecord gr = i.next();
-
+		for (GroupRecord gr : s) {
 			System.out.println(gr);
 
 			final GroupRecord found = gp.findGroupRecord(gr.getCourseId(), gr.getExternalGroupKey());
-			if ((found == gr) && found.equals(gr)) {
+			if (found == gr && found.equals(gr)) {
 				System.out.println("Successfully found this GroupRecord in the parser");
 			} else {
 				System.out.println("Did NOT find this GroupRecord in the parser");

@@ -16,8 +16,7 @@ package com.learningobjects.community.abgm.servlet;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,8 +96,7 @@ public class ConfigServlet extends HttpServlet {
 			}
 			sp.store();
 
-			for (final Iterator<Map.Entry<Object, Object>> i = sp.entrySet().iterator(); i.hasNext();) {
-				Map.Entry<Object, Object> e = i.next();
+			for (Entry<Object, Object> e : sp.entrySet()) {
 				logger.config(e.getKey() + " = " + e.getValue());
 			}
 
@@ -117,7 +115,7 @@ public class ConfigServlet extends HttpServlet {
 
 			logger.info("Configuration successfully updated");
 
-			sendReceipt(request, response, (updateMessage.length() == 0) ? "The changes have been applied successfully."
+			sendReceipt(request, response, updateMessage.length() == 0 ? "The changes have been applied successfully."
 					: updateMessage, true, null);
 
 		} catch (SchedulerException e) {

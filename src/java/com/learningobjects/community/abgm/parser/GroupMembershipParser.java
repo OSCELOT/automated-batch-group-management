@@ -67,7 +67,7 @@ public class GroupMembershipParser {
 			final Matcher lineMatcher = linePattern.matcher(aLine);
 			final Matcher commentMatcher = commentPattern.matcher(aLine);
 
-			if ((aLine.length() == 0) || commentMatcher.matches()) {
+			if (aLine.length() == 0 || commentMatcher.matches()) {
 				// Do nothing
 			} else if (lineMatcher.matches()) {
 				final GroupMembershipRecord aRecord = new GroupMembershipRecord();
@@ -112,8 +112,8 @@ public class GroupMembershipParser {
 	public Set<GroupMembershipRecord> getAllGroupMembershipRecords() {
 		final Set<GroupMembershipRecord> toReturn = new HashSet<GroupMembershipRecord>();
 
-		for (final Iterator<Set<GroupMembershipRecord>> i = byCourse.values().iterator(); i.hasNext();) {
-			toReturn.addAll(i.next());
+		for (Set<GroupMembershipRecord> set : byCourse.values()) {
+			toReturn.addAll(set);
 		}
 
 		return Collections.unmodifiableSet(toReturn);
@@ -186,9 +186,7 @@ public class GroupMembershipParser {
 		s = gp.getAllGroupMembershipRecords();
 
 		System.out.println("Starting");
-		for (final Iterator<GroupMembershipRecord> i = s.iterator(); i.hasNext();) {
-			final GroupMembershipRecord gr = i.next();
-
+		for (GroupMembershipRecord gr : s) {
 			System.out.println(gr);
 			/*
 			 * final GroupRecord found = gp.findGroupRecord(gr.getCourseId(), gr.getExternalGroupKey()); if ((found == gr) &&

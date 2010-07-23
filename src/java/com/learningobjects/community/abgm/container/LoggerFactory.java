@@ -90,10 +90,10 @@ public class LoggerFactory {
 	 * @exception IOException Description of the Exception
 	 */
 	public static synchronized boolean setLoggingDirectory(File dir) throws IOException {
-		if ((dir != null) && dir.isDirectory() && dir.canWrite()) {
+		if (dir != null && dir.isDirectory() && dir.canWrite()) {
 			Handler[] handlers = myLogger.getHandlers();
-			for (int i = 0; i < handlers.length; i++) {
-				myLogger.removeHandler(handlers[i]);
+			for (Handler handler : handlers) {
+				myLogger.removeHandler(handler);
 			}
 			final FileHandler fh = new FileHandler(dir.getCanonicalPath() + "/abgm%g.log");
 			fh.setFormatter(new SimpleFormatter());
