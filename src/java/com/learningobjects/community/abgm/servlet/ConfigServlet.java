@@ -32,6 +32,7 @@ import com.learningobjects.community.abgm.container.LoggerFactory;
 import com.learningobjects.community.abgm.logic.ControllerJob;
 
 public class ConfigServlet extends HttpServlet {
+	private static final long serialVersionUID = 3482916598262706582L;
 	private Logger logger = LoggerFactory.getLogger();
 
 	public void destroy() {

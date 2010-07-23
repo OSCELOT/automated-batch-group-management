@@ -31,6 +31,7 @@ import com.learningobjects.community.abgm.util.BbContextUtil;
 
 public class BootstrapServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1205900289053709797L;
 	private static final int MAX_LOG_SIZE = 20 * 1024 * 1024;
 	private static final int MAX_LOGS = 10;
 

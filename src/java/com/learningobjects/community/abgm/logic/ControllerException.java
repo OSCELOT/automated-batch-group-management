@@ -22,6 +22,8 @@ package com.learningobjects.community.abgm.logic;
  * @version $Rev: 4608 $
  */
 public class ControllerException extends Exception {
+	private static final long serialVersionUID = 760999720600187709L;
+
 	public ControllerException(String msg) {
 		super(msg);
 	}

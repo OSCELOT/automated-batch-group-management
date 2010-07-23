@@ -19,6 +19,7 @@ import java.util.Properties;
 
 public class SystemProperties extends Properties {
 
+	private static final long serialVersionUID = 4818290789593922705L;
 	private static SystemProperties _systemProperties = null;
 	private String _systemPropertiesPath = null;
 
