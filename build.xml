@@ -23,6 +23,9 @@
 
     <property environment="env" />
 
+    <!-- You should create this file locally and define BB90_HOME in it -->
+    <property file="build.properties" />
+
     <!-- set global properties for this build -->
     <property name="shortname" value="abgm" />
     <property name="longname" value="ABGM Tool" />
@@ -38,7 +41,7 @@
     <property name="resources" location="resources" />
     <property name="distlib" location="distlib" />
 
-    <property name="version" value="1.2.5" />
+    <property name="version" value="1.2.6" />
     <property name="dist.name" value="${shortname}-${version}.${label}" />
     <property name="srcdist.zip" location="${dist}/${dist.name}-src.zip" />
 
@@ -47,6 +50,9 @@
             <include name="**/*.jar" />
         </fileset>
         <fileset dir="lib">
+            <include name="**/*.jar" />
+        </fileset>
+        <fileset dir="${BB90_HOME}">
             <include name="**/*.jar" />
         </fileset>
     </path>
@@ -224,12 +230,11 @@
           target: -require-bb-platform
          - - - - - - - - - - - - - - - - - -->
     <target name="-require-bb-platform">
-        <property name="lib.dir" location="lib" />
-        <available file="${lib.dir}/bb-platform.jar"
+        <available file="${BB90_HOME}/bb-platform.jar"
                    type="file"
                    property="bb-platform-available" />
         <fail unless="bb-platform-available">
-            Please copy bb-platform.jar from your blackboard/systemlib directory into ${lib.dir}.
+            Please define BB90_HOME in build.properties and copy bb-platform.jar from your blackboard/systemlib directory into it.
         </fail>
     </target>
 

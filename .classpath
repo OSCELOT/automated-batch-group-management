@@ -6,7 +6,7 @@
 	<classpathentry kind="lib" path="distlib/commons-vfs-1.0.jar"/>
 	<classpathentry kind="lib" path="distlib/quartz-1.4.3.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="lib/bb-platform.jar"/>
+	<classpathentry kind="var" path="BB90_HOME/bb-platform.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="_classes_"/>
 </classpath>
