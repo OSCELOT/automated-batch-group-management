@@ -52,7 +52,7 @@ public class GroupParser {
 	private final static Pattern linePattern = Pattern
 			.compile("^(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)$");
 	/** A Map of CourseId to Sets of GroupRecords */
-	private final Map byCourse;
+	private final Map<String, Set<GroupRecord>> byCourse;
 	private final Logger logger = LoggerFactory.getLogger();
 
 	/**
@@ -72,11 +72,11 @@ public class GroupParser {
 	 * 
 	 * @return A Set of GroupRecords.
 	 */
-	public Set getAllGroupRecords() {
-		final Set toReturn = new HashSet();
+	public Set<GroupRecord> getAllGroupRecords() {
+		final Set<GroupRecord> toReturn = new HashSet<GroupRecord>();
 
-		for (final Iterator i = byCourse.values().iterator(); i.hasNext();) {
-			toReturn.addAll((Collection) i.next());
+		for (final Iterator<Set<GroupRecord>> i = byCourse.values().iterator(); i.hasNext();) {
+			toReturn.addAll(i.next());
 		}
 
 		return Collections.unmodifiableSet(toReturn);
@@ -91,14 +91,14 @@ public class GroupParser {
 	 *         does not exist.
 	 */
 	public GroupRecord findGroupRecord(final String courseId, final String groupId) {
-		final Set lookup = findGroupRecords(courseId);
+		final Set<GroupRecord> lookup = findGroupRecords(courseId);
 
 		final GroupRecord compareTo = new GroupRecord();
 		compareTo.setCourseId(courseId);
 		compareTo.setExternalGroupKey(groupId);
 
-		for (final Iterator i = lookup.iterator(); i.hasNext();) {
-			final GroupRecord theRecord = (GroupRecord) i.next();
+		for (final Iterator<GroupRecord> i = lookup.iterator(); i.hasNext();) {
+			final GroupRecord theRecord = i.next();
 
 			if (theRecord.equals(compareTo)) {
 				return theRecord;
@@ -114,11 +114,11 @@ public class GroupParser {
 	 * @param courseId The course id the GroupRecord should have
 	 * @return A Set of GroupRecords whose courseId matchse the provided value, which may have a zero-length
 	 */
-	public Set findGroupRecords(final String courseId) {
-		Set lookup = (Set) byCourse.get(courseId);
+	public Set<GroupRecord> findGroupRecords(final String courseId) {
+		Set<GroupRecord> lookup = byCourse.get(courseId);
 
 		if (lookup == null) {
-			lookup = new HashSet();
+			lookup = new HashSet<GroupRecord>();
 		}
 		return Collections.unmodifiableSet(lookup);
 	}
@@ -130,8 +130,8 @@ public class GroupParser {
 	 * @exception IOException Thrown if file is not found or there is an error reading
 	 * @exception ParseException Thrown if the file is in an unparsable format
 	 */
-	private Map parse() throws IOException, ParseException {
-		final Map toReturn = new TreeMap();
+	private Map<String, Set<GroupRecord>> parse() throws IOException, ParseException {
+		final Map<String, Set<GroupRecord>> toReturn = new TreeMap<String, Set<GroupRecord>>();
 
 		final BufferedReader in = new BufferedReader(new FileReader(dataFile));
 
@@ -157,9 +157,9 @@ public class GroupParser {
 				aRecord.setIsEmailAvailable(parseBoolean(lineMatcher.group(8)));
 				aRecord.setIsTransferAreaAvailable(parseBoolean(lineMatcher.group(9)));
 
-				Set addTo = (Set) toReturn.get(courseId);
+				Set<GroupRecord> addTo = toReturn.get(courseId);
 				if (addTo == null) {
-					addTo = new HashSet();
+					addTo = new HashSet<GroupRecord>();
 					toReturn.put(courseId, addTo);
 				}
 				if (!addTo.add(aRecord)) {
@@ -191,7 +191,7 @@ public class GroupParser {
 	 * @param args One parameter of the file name.
 	 */
 	public static void main(String[] args) {
-		final Set s;
+		final Set<GroupRecord> s;
 		final GroupParser gp;
 
 		try {
@@ -203,8 +203,8 @@ public class GroupParser {
 		s = gp.getAllGroupRecords();
 
 		System.out.println("Starting");
-		for (final Iterator i = s.iterator(); i.hasNext();) {
-			final GroupRecord gr = (GroupRecord) i.next();
+		for (final Iterator<GroupRecord> i = s.iterator(); i.hasNext();) {
+			final GroupRecord gr = i.next();
 
 			System.out.println(gr);
 

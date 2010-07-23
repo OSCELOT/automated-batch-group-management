@@ -42,7 +42,7 @@ public class BbGroupManager {
 	/**
 	 * Map GroupRecord keys from data file to Id objects to account for changing titles of Groups.
 	 */
-	private final static Map groupMap = new HashMap();
+	private final static Map<GroupRecord, Id> groupMap = new HashMap<GroupRecord, Id>();
 
 	/** Store initialization status of groupMap, used by init() */
 	private static boolean initialized = false;
@@ -105,7 +105,7 @@ public class BbGroupManager {
 				final GroupRecord key = new GroupRecord();
 				key.setCourseId(in.readUTF());
 				key.setExternalGroupKey(in.readUTF());
-				final String externalId = (String) in.readUTF();
+				final String externalId = in.readUTF();
 
 				final Id id = Id.generateId(Course.DATA_TYPE, externalId);
 
@@ -125,15 +125,15 @@ public class BbGroupManager {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(store));
 			out.writeInt(1);
 
-			final Set entries = groupMap.entrySet();
+			final Set<Map.Entry<GroupRecord,Id>> entries = groupMap.entrySet();
 
 			out.writeInt(entries.size());
 
-			for (final Iterator i = entries.iterator(); i.hasNext();) {
-				final Map.Entry e = (Map.Entry) i.next();
+			for (final Iterator<Map.Entry<GroupRecord,Id>> i = entries.iterator(); i.hasNext();) {
+				final Map.Entry<GroupRecord,Id> e = i.next();
 
-				final GroupRecord key = (GroupRecord) e.getKey();
-				final Id id = (Id) e.getValue();
+				final GroupRecord key = e.getKey();
+				final Id id = e.getValue();
 
 				out.writeUTF(key.getCourseId());
 				out.writeUTF(key.getExternalGroupKey());
@@ -174,7 +174,7 @@ public class BbGroupManager {
 		Group toReturn;
 
 		synchronized (groupMap) {
-			groupId = (Id) groupMap.get(groupRecord);
+			groupId = groupMap.get(groupRecord);
 		}
 
 		if (groupId == null) {// Not managed by us, must create

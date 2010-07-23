@@ -44,9 +44,9 @@ public class GroupMembershipParser {
 	private final static Pattern commentPattern = Pattern.compile("^#.*$");
 	private final static Pattern linePattern = Pattern.compile("^(.*)\\|(.*)\\|(.*)$");
 	/** A Map of CourseId to Sets of GroupMemershipRecords */
-	private final Map byCourse;
+	private final Map<String, Set<GroupMembershipRecord>> byCourse;
 	/** A Map of GroupId to Sets of GroupMemershipRecords */
-	private final Map byGroup;
+	private final Map<String, Set<GroupMembershipRecord>> byGroup;
 	private final Logger logger = LoggerFactory.getLogger();
 
 	/**
@@ -57,8 +57,8 @@ public class GroupMembershipParser {
 	 * @exception ParseException Description of the Exception
 	 */
 	public GroupMembershipParser(final File dataFile) throws IOException, ParseException {
-		byCourse = new TreeMap();
-		byGroup = new TreeMap();
+		byCourse = new TreeMap<String, Set<GroupMembershipRecord>>();
+		byGroup = new TreeMap<String, Set<GroupMembershipRecord>>();
 
 		final BufferedReader in = new BufferedReader(new FileReader(dataFile));
 
@@ -80,15 +80,15 @@ public class GroupMembershipParser {
 				aRecord.setExternalGroupKey(groupId);
 				aRecord.setExternalUserKey(userId);
 
-				Set courseSet = (Set) byCourse.get(courseId);
+				Set<GroupMembershipRecord> courseSet = byCourse.get(courseId);
 				if (courseSet == null) {
-					courseSet = new HashSet();
+					courseSet = new HashSet<GroupMembershipRecord>();
 					byCourse.put(courseId, courseSet);
 				}
 
-				Set groupSet = (Set) byGroup.get(groupId);
+				Set<GroupMembershipRecord> groupSet = byGroup.get(groupId);
 				if (groupSet == null) {
-					groupSet = new HashSet();
+					groupSet = new HashSet<GroupMembershipRecord>();
 					byGroup.put(groupId, groupSet);
 				}
 
@@ -109,11 +109,11 @@ public class GroupMembershipParser {
 	 * 
 	 * @return A Set of GroupMembershipRecords.
 	 */
-	public Set getAllGroupMembershipRecords() {
-		final Set toReturn = new HashSet();
+	public Set<GroupMembershipRecord> getAllGroupMembershipRecords() {
+		final Set<GroupMembershipRecord> toReturn = new HashSet<GroupMembershipRecord>();
 
-		for (final Iterator i = byCourse.values().iterator(); i.hasNext();) {
-			toReturn.addAll((Collection) i.next());
+		for (final Iterator<Set<GroupMembershipRecord>> i = byCourse.values().iterator(); i.hasNext();) {
+			toReturn.addAll(i.next());
 		}
 
 		return Collections.unmodifiableSet(toReturn);
@@ -127,11 +127,11 @@ public class GroupMembershipParser {
 	 * @return A Set of GroupMembershipRecords whose courseId and external groupId match the provided values, empty if
 	 *         none exist.
 	 */
-	public Set findGroupMembershipRecords(final String courseId, final String groupId) {
-		final Set group = findGroupMembershipRecordsByCourse(courseId);
-		final Set course = findGroupMembershipRecordsByGroup(groupId);
+	public Set<GroupMembershipRecord> findGroupMembershipRecords(final String courseId, final String groupId) {
+		final Set<GroupMembershipRecord> group = findGroupMembershipRecordsByCourse(courseId);
+		final Set<GroupMembershipRecord> course = findGroupMembershipRecordsByGroup(groupId);
 
-		Set toReturn = new HashSet();
+		Set<GroupMembershipRecord> toReturn = new HashSet<GroupMembershipRecord>();
 		toReturn.addAll(group);
 		toReturn.retainAll(course);
 
@@ -144,11 +144,11 @@ public class GroupMembershipParser {
 	 * @param courseId The course id the GroupMembershipRecord should have
 	 * @return A Set of GroupMembershipRecords whose courseId matchse the provided value, which may have a zero-length
 	 */
-	public Set findGroupMembershipRecordsByCourse(final String courseId) {
-		Set lookup = (Set) byCourse.get(courseId);
+	public Set<GroupMembershipRecord> findGroupMembershipRecordsByCourse(final String courseId) {
+		Set<GroupMembershipRecord> lookup = byCourse.get(courseId);
 
 		if (lookup == null) {
-			lookup = new HashSet();
+			lookup = new HashSet<GroupMembershipRecord>();
 		}
 		return Collections.unmodifiableSet(lookup);
 	}
@@ -159,11 +159,11 @@ public class GroupMembershipParser {
 	 * @param groupId The group id the GroupMembershipRecord should have
 	 * @return A Set of GroupMembershipRecords whose courseId matchse the provided value, which may have a zero-length
 	 */
-	public Set findGroupMembershipRecordsByGroup(final String groupId) {
-		Set lookup = (Set) byGroup.get(groupId);
+	public Set<GroupMembershipRecord> findGroupMembershipRecordsByGroup(final String groupId) {
+		Set<GroupMembershipRecord> lookup = byGroup.get(groupId);
 
 		if (lookup == null) {
-			lookup = new HashSet();
+			lookup = new HashSet<GroupMembershipRecord>();
 		}
 		return Collections.unmodifiableSet(lookup);
 	}
@@ -184,7 +184,7 @@ public class GroupMembershipParser {
 	 * @param args One parameter of the file name.
 	 */
 	public static void main(String[] args) {
-		final Set s;
+		final Set<GroupMembershipRecord> s;
 		final GroupMembershipParser gp;
 
 		try {
@@ -196,8 +196,8 @@ public class GroupMembershipParser {
 		s = gp.getAllGroupMembershipRecords();
 
 		System.out.println("Starting");
-		for (final Iterator i = s.iterator(); i.hasNext();) {
-			final GroupMembershipRecord gr = (GroupMembershipRecord) i.next();
+		for (final Iterator<GroupMembershipRecord> i = s.iterator(); i.hasNext();) {
+			final GroupMembershipRecord gr = i.next();
 
 			System.out.println(gr);
 			/*

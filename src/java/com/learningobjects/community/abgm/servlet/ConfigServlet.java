@@ -94,8 +94,8 @@ public class ConfigServlet extends HttpServlet {
 			}
 			sp.store();
 
-			for (final Iterator i = sp.entrySet().iterator(); i.hasNext();) {
-				Map.Entry e = (Map.Entry) i.next();
+			for (final Iterator<Map.Entry<Object, Object>> i = sp.entrySet().iterator(); i.hasNext();) {
+				Map.Entry<Object, Object> e = i.next();
 				logger.config(e.getKey() + " = " + e.getValue());
 			}
 
