@@ -3,7 +3,7 @@
         <name value="ABGM Tool"/>
         <handle value="abgm"/>
     <description value="ABGM Tool"/>
-        <version value="1.2.6"/>
+        <version value="1.2.7"/>
         <requires>
             <bbversion value="9.0.0"/>
         </requires>

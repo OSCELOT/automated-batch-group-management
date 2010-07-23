@@ -13,7 +13,7 @@ public class GroupParserTest extends TestCase {
 		File groupFile = new File(GroupParserTest.class.getResource("/group.dat").toURI());
 		GroupParser parser = new GroupParser(groupFile);
 		Set<GroupRecord> allGroups = parser.getAllGroupRecords();
-		assertEquals(15, allGroups.size());
+		assertEquals(16, allGroups.size());
 
 		validateLegacyGroup(parser, "COURSE1", "C1G1", "Group 1 - legacy", "Description", true, true, true, true, true);
 		validateLegacyGroup(parser, "COURSE1", "C1G2", "Group 2 - legacy", "Group 2 description", true, true, true, true,
@@ -32,18 +32,20 @@ public class GroupParserTest extends TestCase {
 				false, true);
 
 		validateModernGroup(parser, "COURSE2", "C2G1", "Group 1 - modern - all off", "Description", false, false, false,
-				false, false, false, false, false, false, false);
+				false, false, false, false, false, false, false, false);
 		validateModernGroup(parser, "COURSE2", "C2G2", "Group 2 - modern - all on", "Description", true, true, true, true,
-				true, true, true, true, true, true);
+				true, true, true, true, true, true, true);
 		validateModernGroup(parser, "COURSE2", "C2G3", "Group 3 - modern - blog", "Description", false, false, false,
-				false, false, true, false, false, false, false);
+				false, false, true, false, false, false, false, false);
 		validateModernGroup(parser, "COURSE2", "C2G4", "Group 4 - modern - journal", "Description", false, false, false,
-				false, false, false, true, false, false, false);
+				false, false, false, true, false, false, false, false);
 		validateModernGroup(parser, "COURSE2", "C2G5", "Group 5 - modern - wiki", "Description", false, false, false,
-				false, false, false, false, true, false, false);
+				false, false, false, false, true, false, false, false);
 		validateModernGroup(parser, "COURSE2", "C2G6", "Group 6 - modern - my_scholar_home", "Description", false, false,
-				false, false, false, false, false, false, true, false);
+				false, false, false, false, false, false, true, false, false);
 		validateModernGroup(parser, "COURSE2", "C2G7", "Group 7 - modern - scholar_course_home", "Description", false,
+				false, false, false, false, false, false, false, false, true, false);
+		validateModernGroup(parser, "COURSE2", "C2G8", "Group 8 - modern - personalization", "Description", false, false,
 				false, false, false, false, false, false, false, false, true);
 	}
 
@@ -51,12 +53,13 @@ public class GroupParserTest extends TestCase {
 			String description, boolean isAvailable, boolean isDiscussion, boolean isCollab, boolean isEmail, boolean isFile) {
 
 		validateModernGroup(parser, courseId, groupId, title, description, isAvailable, isDiscussion, isCollab, isEmail,
-				isFile, false, false, false, false, false);
+				isFile, false, false, false, false, false, false);
 	}
 
 	private void validateModernGroup(GroupParser parser, String courseId, String groupId, String title,
 			String description, boolean isAvailable, boolean isDiscussion, boolean isCollab, boolean isEmail, boolean isFile,
-			boolean isBlog, boolean isJournal, boolean isWiki, boolean isMyScholar, boolean isScholarCourse) {
+			boolean isBlog, boolean isJournal, boolean isWiki, boolean isMyScholar, boolean isScholarCourse,
+			boolean isCustomizable) {
 
 		GroupRecord groupRecord = parser.findGroupRecord(courseId, groupId);
 		assertNotNull(groupRecord);
@@ -73,5 +76,6 @@ public class GroupParserTest extends TestCase {
 		assertEquals(isWiki, groupRecord.isWikiAvailable());
 		assertEquals(isMyScholar, groupRecord.isMyScholarHomeAvailable());
 		assertEquals(isScholarCourse, groupRecord.isScholarCourseHomeAvailable());
+		assertEquals(isCustomizable, groupRecord.isCustomizable());
 	}
 }

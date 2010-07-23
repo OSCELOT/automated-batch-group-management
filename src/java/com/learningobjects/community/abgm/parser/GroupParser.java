@@ -39,6 +39,7 @@ import com.learningobjects.community.abgm.data.GroupRecord;
  * <li>(optional) wiki</li>
  * <li>(optional) my_scholar_home</li>
  * <li>(optional) scholar_course_home</li>
+ * <li>(optional) personalization</li>
  * </ul>
  * <br/>
  * These fields should be delimited by a pipe. Comments may begin with a # as the first character in the line.<br/>
@@ -141,7 +142,7 @@ public class GroupParser {
 			}
 
 			String[] lineParts = aLine.split("\\|");
-			if (lineParts.length == 9 || lineParts.length == 14) {
+			if (lineParts.length >= 9 && lineParts.length <= 15) {
 				final GroupRecord aRecord = new GroupRecord();
 				final String courseId = lineParts[0];
 				aRecord.setCourseId(courseId);
@@ -155,13 +156,18 @@ public class GroupParser {
 				aRecord.setIsTransferAreaAvailable(parseBoolean(lineParts[8]));
 
 				// Optional extra fields added in ABGM 1.2
-				if (lineParts.length == 14) {
+				if (lineParts.length >= 10)
 					aRecord.setBlogAvailable(parseBoolean(lineParts[9]));
+				if (lineParts.length >= 11)
 					aRecord.setJournalAvailable(parseBoolean(lineParts[10]));
+				if (lineParts.length >= 12)
 					aRecord.setWikiAvailable(parseBoolean(lineParts[11]));
+				if (lineParts.length >= 13)
 					aRecord.setMyScholarHomeAvailable(parseBoolean(lineParts[12]));
+				if (lineParts.length >= 14)
 					aRecord.setScholarCourseHomeAvailable(parseBoolean(lineParts[13]));
-				}
+				if (lineParts.length >= 15)
+					aRecord.setCustomizable(parseBoolean(lineParts[14]));
 
 				Set<GroupRecord> addTo = toReturn.get(courseId);
 				if (addTo == null) {

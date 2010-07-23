@@ -7,10 +7,11 @@ COURSE1|C1G6|Group 6 - legacy - collaboration|Description|N|N|Y|N|N
 COURSE1|C1G7|Group 7 - legacy - email|Description|N|N|N|Y|N
 COURSE1|C1G8|Group 8 - legacy - file|Description|N|N|N|N|Y
 
-COURSE2|C2G1|Group 1 - modern - all off|Description|N|N|N|N|N|N|N|N|N|N
-COURSE2|C2G2|Group 2 - modern - all on|Description|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y
-COURSE2|C2G3|Group 3 - modern - blog|Description|N|N|N|N|N|Y|N|N|N|N
-COURSE2|C2G4|Group 4 - modern - journal|Description|N|N|N|N|N|N|Y|N|N|N
-COURSE2|C2G5|Group 5 - modern - wiki|Description|N|N|N|N|N|N|N|Y|N|N
-COURSE2|C2G6|Group 6 - modern - my_scholar_home|Description|N|N|N|N|N|N|N|N|Y|N
-COURSE2|C2G7|Group 7 - modern - scholar_course_home|Description|N|N|N|N|N|N|N|N|N|Y
+COURSE2|C2G1|Group 1 - modern - all off|Description|N|N|N|N|N|N|N|N|N|N|N
+COURSE2|C2G2|Group 2 - modern - all on|Description|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y
+COURSE2|C2G3|Group 3 - modern - blog|Description|N|N|N|N|N|Y|N|N|N|N|N
+COURSE2|C2G4|Group 4 - modern - journal|Description|N|N|N|N|N|N|Y|N|N|N|N
+COURSE2|C2G5|Group 5 - modern - wiki|Description|N|N|N|N|N|N|N|Y|N|N|N
+COURSE2|C2G6|Group 6 - modern - my_scholar_home|Description|N|N|N|N|N|N|N|N|Y|N|N
+COURSE2|C2G7|Group 7 - modern - scholar_course_home|Description|N|N|N|N|N|N|N|N|N|Y|N
+COURSE2|C2G8|Group 8 - modern - personalization|Description|N|N|N|N|N|N|N|N|N|N|Y

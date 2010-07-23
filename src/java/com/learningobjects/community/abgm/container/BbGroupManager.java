@@ -251,6 +251,7 @@ public class BbGroupManager {
 		addOrRemoveAvailableTool(group, "Bb-wiki", groupRecord.isWikiAvailable());
 		addOrRemoveAvailableTool(group, "Bb-ScholarUser", groupRecord.isMyScholarHomeAvailable());
 		addOrRemoveAvailableTool(group, "Bb-ScholarCrs", groupRecord.isScholarCourseHomeAvailable());
+		group.setCustomizable(groupRecord.isCustomizable());
 	}
 
 	private void addOrRemoveAvailableTool(Group group, String toolHandle, boolean isToolAvailable) {

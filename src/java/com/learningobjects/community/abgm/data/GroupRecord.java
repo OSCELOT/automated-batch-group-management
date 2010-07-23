@@ -30,6 +30,7 @@ public class GroupRecord {
 	private boolean _isWikiAvailable;
 	private boolean _isMyScholarHomeAvailable;
 	private boolean _isScholarCourseHomeAvailable;
+	private boolean _isCustomizable;
 
 	public String getExternalGroupKey() {
 		return _externalGroupKey;
@@ -143,6 +144,14 @@ public class GroupRecord {
 		_isScholarCourseHomeAvailable = isScholarCourseHomeAvailable;
 	}
 
+	public void setCustomizable(boolean isCustomizable) {
+		_isCustomizable = isCustomizable;
+	}
+
+	public boolean isCustomizable() {
+		return _isCustomizable;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("GroupRecord [");
@@ -160,6 +169,7 @@ public class GroupRecord {
 		sb.append(", isWikiAvailable=").append(_isWikiAvailable);
 		sb.append(", isMyScholarHomeAvailable=").append(_isMyScholarHomeAvailable);
 		sb.append(", isScholarCourseHomeAvailable=").append(_isScholarCourseHomeAvailable);
+		sb.append(", isCustomizable=").append(_isCustomizable);
 		sb.append("]");
 		return sb.toString();
 	}
