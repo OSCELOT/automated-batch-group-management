@@ -70,9 +70,9 @@ public class BootstrapServlet extends HttpServlet {
 		SchedulerFactory schedulerFactory = new org.quartz.impl.StdSchedulerFactory();
 		Scheduler scheduler = schedulerFactory.getScheduler();
 		scheduler.start();
-		JobDetail jobDetail = new JobDetail("myJob", scheduler.DEFAULT_GROUP, ControllerJob.class);
+		JobDetail jobDetail = new JobDetail("myJob", Scheduler.DEFAULT_GROUP, ControllerJob.class);
 		try {
-			CronTrigger trigger = new CronTrigger("myTrigger", scheduler.DEFAULT_GROUP, SystemProperties.getInstance()
+			CronTrigger trigger = new CronTrigger("myTrigger", Scheduler.DEFAULT_GROUP, SystemProperties.getInstance()
 					.getProperty("schedule"));
 			trigger.setMisfireInstruction(CronTrigger.MISFIRE_INSTRUCTION_DO_NOTHING);
 			scheduler.scheduleJob(jobDetail, trigger);

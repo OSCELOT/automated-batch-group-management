@@ -101,11 +101,11 @@ public class ConfigServlet extends HttpServlet {
 			// update quartz
 			SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
 			Scheduler scheduler = schedFact.getScheduler();
-			scheduler.deleteJob("myJob", scheduler.DEFAULT_GROUP);
+			scheduler.deleteJob("myJob", Scheduler.DEFAULT_GROUP);
 
 			if (sp.getProperty("schedule", "").length() > 0) {
-				JobDetail jobDetail = new JobDetail("myJob", scheduler.DEFAULT_GROUP, ControllerJob.class);
-				CronTrigger trigger = new CronTrigger("myTrigger", scheduler.DEFAULT_GROUP, SystemProperties.getInstance()
+				JobDetail jobDetail = new JobDetail("myJob", Scheduler.DEFAULT_GROUP, ControllerJob.class);
+				CronTrigger trigger = new CronTrigger("myTrigger", Scheduler.DEFAULT_GROUP, SystemProperties.getInstance()
 						.getProperty("schedule"));
 				trigger.setMisfireInstruction(CronTrigger.MISFIRE_INSTRUCTION_DO_NOTHING);
 				scheduler.scheduleJob(jobDetail, trigger);
