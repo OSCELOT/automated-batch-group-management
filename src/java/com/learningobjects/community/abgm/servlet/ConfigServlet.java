@@ -35,14 +35,17 @@ public class ConfigServlet extends HttpServlet {
 	private static final long serialVersionUID = 3482916598262706582L;
 	private Logger logger = LoggerFactory.getLogger();
 
+	@Override
 	public void destroy() {
 		super.destroy();
 	}
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}

@@ -35,6 +35,7 @@ public class BootstrapServlet extends HttpServlet {
 	private static final int MAX_LOG_SIZE = 20 * 1024 * 1024;
 	private static final int MAX_LOGS = 10;
 
+	@Override
 	public void init() throws ServletException {
 		// read in system.properties
 		String systemPropertiesPath = getServletConfig().getServletContext().getRealPath(
@@ -62,6 +63,7 @@ public class BootstrapServlet extends HttpServlet {
 		}
 	}
 
+	@Override
 	public void destroy() {
 		super.destroy();
 	}

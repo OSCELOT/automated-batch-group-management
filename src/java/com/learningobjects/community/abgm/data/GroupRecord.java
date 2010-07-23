@@ -98,6 +98,7 @@ public class GroupRecord {
 		_courseId = courseId;
 	}
 
+	@Override
 	public String toString() {
 		return ("_externalGroupKey = " + _externalGroupKey + "\n" + "_title = " + _title + "\n" + "_description = "
 				+ _description + "\n" + "_courseId = " + _courseId + "\n" + "_isAvailable = " + _isAvailable + "\n"
@@ -107,11 +108,13 @@ public class GroupRecord {
 
 	}
 
+	@Override
 	public boolean equals(Object o) {
 		return ((o instanceof GroupRecord) && (((GroupRecord) o)._externalGroupKey.equals(_externalGroupKey)) && (((GroupRecord) o)._courseId
 				.equals(_courseId)));
 	}
 
+	@Override
 	public int hashCode() {
 		return (getClass().getName() + _courseId + "^|^" + _externalGroupKey).hashCode();
 	}

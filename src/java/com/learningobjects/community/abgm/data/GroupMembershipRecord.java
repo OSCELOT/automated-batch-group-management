@@ -44,12 +44,14 @@ public class GroupMembershipRecord {
 		_externalCourseKey = externalCourseKey;
 	}
 
+	@Override
 	public String toString() {
 		return ("_externalCourseKey = " + _externalCourseKey + "\n" + "_externalGroupKey = " + _externalGroupKey + "\n"
 				+ "_externalUserKey = " + _externalUserKey);
 
 	}
 
+	@Override
 	public boolean equals(Object o) {
 		return ((o instanceof GroupMembershipRecord)
 				&& (((GroupMembershipRecord) o)._externalGroupKey.equals(_externalGroupKey))
@@ -57,6 +59,7 @@ public class GroupMembershipRecord {
 				.equals(_externalUserKey)));
 	}
 
+	@Override
 	public int hashCode() {
 		return (getClass().getName() + _externalCourseKey + "^|^" + _externalGroupKey + "^|^" + _externalUserKey)
 				.hashCode();

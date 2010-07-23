@@ -35,6 +35,7 @@ public class ControllerJob implements Job {
 
 	private Logger logger = LoggerFactory.getLogger();
 
+	@Override
 	public void execute(JobExecutionContext context) {
 		executeNow();
 	}

@@ -63,6 +63,7 @@ public class BbGroupManager {
 	}
 
 	/** Object finalizer */
+	@Override
 	public void finalize() {
 		try {
 			save();
