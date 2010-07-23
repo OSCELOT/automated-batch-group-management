@@ -44,6 +44,7 @@
        <permission type="java.net.SocketPermission" name="*" actions="connect,resolve"/>
        <permission type="persist" name="group" actions="create,modify,delete"/>
        <permission type="persist" name="groupmembership" actions="create,modify,delete"/>
+       <permission type="persist" name="availablegrouptool" actions="create,modify,delete"/>
     </permissions>
   </plugin>
 </manifest>
