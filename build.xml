@@ -73,9 +73,9 @@
         <javac debug="true"
                deprecation="on"
                debuglevel="lines,vars,source"
-               target="1.4"
+               target="1.6"
                destdir="${build}"
-               source="1.4">
+               source="1.6">
             <src path="${src}" />
             <include name="com/learningobjects/**" />
             <classpath refid="build.classpath" />
