@@ -30,6 +30,7 @@ import blackboard.persist.PersistenceException;
 import blackboard.platform.plugin.PlugInException;
 import blackboard.platform.plugin.PlugInUtil;
 
+import com.learningobjects.community.abgm.config.SystemProperties;
 import com.learningobjects.community.abgm.container.BbGroupManager;
 import com.learningobjects.community.abgm.container.LoggerFactory;
 import com.learningobjects.community.abgm.data.GroupMembershipRecord;
@@ -151,6 +152,13 @@ public class Controller {
 					logger.log(Level.WARNING, "Unable to delete " + gr.getExternalGroupKey(), e);
 				}
 			}
+
+			SystemProperties sp = SystemProperties.getInstance();
+			boolean updateExistingGroups = sp.isUpdateExistingGroups();
+			if (!updateExistingGroups) {
+				logger.info("Group modifications are disabled.  Property updates will not be applied to existing groups");
+			}
+
 			// We'll have the updated "retained" GroupRecords in the set
 			final Set<GroupRecord> retainedGroupRecords = new HashSet<GroupRecord>(gpNew.getAllGroupRecords());
 			retainedGroupRecords.retainAll(gpOld.getAllGroupRecords());
@@ -161,7 +169,7 @@ public class Controller {
 					theGroup = manager.getGroup(gr, false);
 					if (theGroup == null) {
 						logger.warning("Could not get a group that backup says we have: " + gr.getExternalGroupKey());
-					} else {
+					} else if (updateExistingGroups) {
 						manager.updateGroup(gr);
 					}
 				} catch (ValidationException e) {

@@ -50,4 +50,11 @@ public class SystemProperties extends Properties {
 		fos.close();
 	}
 
+	public boolean isUpdateExistingGroups() {
+		return !"no".equalsIgnoreCase(getProperty("updateExistingGroups"));
+	}
+
+	public void setUpdateExistingGroups(boolean updateExistingGroups) {
+		setProperty("updateExistingGroups", updateExistingGroups ? "yes" : "no");
+	}
 }

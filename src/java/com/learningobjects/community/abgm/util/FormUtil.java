@@ -17,7 +17,11 @@ package com.learningobjects.community.abgm.util;
 public class FormUtil {
 
 	public static String checked(String a, String b) {
-		if (a.equals(b)) {
+		return checked(a.equals(b));
+	}
+
+	public static String checked(boolean checked) {
+		if (checked) {
 			return "checked";
 		} else {
 			return "";
@@ -31,5 +35,4 @@ public class FormUtil {
 			return "";
 		}
 	}
-
 }

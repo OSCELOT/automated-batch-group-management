@@ -87,6 +87,8 @@ public class ConfigServlet extends HttpServlet {
 			sp.setProperty("groupMembershipFileLocation",
 					StringUtils.trimToEmpty(request.getParameter("groupMembershipFileLocation")));
 
+			sp.setUpdateExistingGroups("yes".equals(StringUtils.trimToEmpty(request.getParameter("updateExistingGroups"))));
+
 			String logFileLocation = StringUtils.trimToEmpty(request.getParameter("logFileLocation"));
 			File logDirectory = new File(logFileLocation);
 			if ((logDirectory.isDirectory() || logDirectory.mkdirs()) && LoggerFactory.setLoggingDirectory(logDirectory)) {

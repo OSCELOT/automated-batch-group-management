@@ -82,6 +82,20 @@ SystemProperties sp = SystemProperties.getInstance();
                 <input type="text" name="logFileLocation" size="50"
                     value="<%= StringUtils.trimToEmpty(sp.getProperty("logFileLocation")) %>" />
             </bbUI:dataElement>
-        </bbUI:step> <bbUI:stepSubmit title="Submit" number="3" /></form>
+        </bbUI:step> <bbUI:step title="Group Updates" number="3">
+            <bbUI:instructions>
+            If this option is enabled, groups previously created by ABGM will be updated to reflect the latest
+            settings in the feed file.  If this option is disabled, existing groups will not be modified, allowing
+            instructors to adjust the group properties after initial creation.
+            <p>
+            Memberships in groups will always be processed, even if this setting is off.
+            </bbUI:instructions>
+            <bbUI:dataElement label="Modify existing groups">
+                <label><input type="radio" name="updateExistingGroups" value="yes"
+                 <%= FormUtil.checked(sp.isUpdateExistingGroups()) %> /> Yes</label>
+                <label><input type="radio" name="updateExistingGroups" value="no"
+                 <%= FormUtil.checked(!sp.isUpdateExistingGroups()) %> /> No</label>
+            </bbUI:dataElement>
+        </bbUI:step> <bbUI:stepSubmit title="Submit" number="4" /></form>
     </bbUI:docTemplate>
 </bbData:context>
