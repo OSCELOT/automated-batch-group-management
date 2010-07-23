@@ -3,7 +3,7 @@
         <name value="ABGM Tool"/>
         <handle value="abgm"/>
     <description value="ABGM Tool"/>
-        <version value="1.2.5"/>
+        <version value="1.2.6"/>
         <requires>
             <bbversion value="9.0.0"/>
         </requires>
@@ -11,7 +11,7 @@
             <id value="lobj"/>
             <name value="Learning Objects, Inc."/>
             <url value="http://www.learningobjects.com"/>
-            <description value="Please visit our website at htt://www.learningobjects.com to learn more."/>
+            <description value="Please visit our website at http://www.learningobjects.com to learn more."/>
         </vendor>
         <http-actions></http-actions>    
     <application-defs>
@@ -45,6 +45,8 @@
        <permission type="persist" name="group" actions="create,modify,delete"/>
        <permission type="persist" name="groupmembership" actions="create,modify,delete"/>
        <permission type="persist" name="availablegrouptool" actions="create,modify,delete"/>
+       <permission type="persist" name="wiki" actions="persist,create,modify,delete"/>
+       <permission type="persist" name="blog" actions="persist,create,modify,delete"/>
     </permissions>
   </plugin>
 </manifest>

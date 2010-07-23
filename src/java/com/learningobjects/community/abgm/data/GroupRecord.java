@@ -25,6 +25,11 @@ public class GroupRecord {
 	private boolean _isDiscussionBoardAvailable = true;
 	private boolean _isEmailAvailable = true;
 	private boolean _isTransferAreaAvailable = true;
+	private boolean _isBlogAvailable;
+	private boolean _isJournalAvailable;
+	private boolean _isWikiAvailable;
+	private boolean _isMyScholarHomeAvailable;
+	private boolean _isScholarCourseHomeAvailable;
 
 	public String getExternalGroupKey() {
 		return _externalGroupKey;
@@ -98,14 +103,65 @@ public class GroupRecord {
 		_courseId = courseId;
 	}
 
+	public boolean isBlogAvailable() {
+		return _isBlogAvailable;
+	}
+
+	public void setBlogAvailable(boolean isBlogAvailable) {
+		_isBlogAvailable = isBlogAvailable;
+	}
+
+	public boolean isJournalAvailable() {
+		return _isJournalAvailable;
+	}
+
+	public void setJournalAvailable(boolean isJournalAvailable) {
+		_isJournalAvailable = isJournalAvailable;
+	}
+
+	public boolean isWikiAvailable() {
+		return _isWikiAvailable;
+	}
+
+	public void setWikiAvailable(boolean isWikiAvailable) {
+		_isWikiAvailable = isWikiAvailable;
+	}
+
+	public boolean isMyScholarHomeAvailable() {
+		return _isMyScholarHomeAvailable;
+	}
+
+	public void setMyScholarHomeAvailable(boolean isMyScholarHomeAvailable) {
+		_isMyScholarHomeAvailable = isMyScholarHomeAvailable;
+	}
+
+	public boolean isScholarCourseHomeAvailable() {
+		return _isScholarCourseHomeAvailable;
+	}
+
+	public void setScholarCourseHomeAvailable(boolean isScholarCourseHomeAvailable) {
+		_isScholarCourseHomeAvailable = isScholarCourseHomeAvailable;
+	}
+
 	@Override
 	public String toString() {
-		return "_externalGroupKey = " + _externalGroupKey + "\n" + "_title = " + _title + "\n" + "_description = "
-				+ _description + "\n" + "_courseId = " + _courseId + "\n" + "_isAvailable = " + _isAvailable + "\n"
-				+ "_isChatRoomAvailable = " + _isChatRoomAvailable + "\n" + "_isDiscussionBoardAvailable = "
-				+ _isDiscussionBoardAvailable + "\n" + "_isEmailAvailable = " + _isEmailAvailable + "\n"
-				+ "_isTransferAreaAvailable = " + _isTransferAreaAvailable;
-
+		StringBuilder sb = new StringBuilder("GroupRecord [");
+		sb.append("externalGroupKey=").append(_externalGroupKey);
+		sb.append(", title=").append(_title);
+		sb.append(", description=").append(_description);
+		sb.append(", courseId=").append(_courseId);
+		sb.append(", isAvailable=").append(_isAvailable);
+		sb.append(", isChatRoomAvailable=").append(_isChatRoomAvailable);
+		sb.append(", isDiscussionBoardAvailable=").append(_isDiscussionBoardAvailable);
+		sb.append(", isEmailAvailable=").append(_isEmailAvailable);
+		sb.append(", isTransferAreaAvailable=").append(_isTransferAreaAvailable);
+		sb.append(", isBlogAvailable=").append(_isBlogAvailable);
+		sb.append(", isJournalAvailable=").append(_isJournalAvailable);
+		sb.append(", isWikiAvailable=").append(_isWikiAvailable);
+		sb.append(", isMyScholarHomeAvailable=").append(_isMyScholarHomeAvailable);
+		sb.append(", isScholarCourseHomeAvailable=").append(_isScholarCourseHomeAvailable);
+		sb.append("]");
+		return sb.toString();
 	}
 
 	@Override
@@ -118,5 +174,4 @@ public class GroupRecord {
 	public int hashCode() {
 		return (getClass().getName() + _courseId + "^|^" + _externalGroupKey).hashCode();
 	}
-
 }

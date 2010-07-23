@@ -3,9 +3,9 @@
 # - a course with id 'CHEM.ASC.ADVISING'
 #
 # Fields:
-# course_id|group_id|name|description|available|discussion|collaboration|email|file
+# course_id|group_id|name|description|available|discussion|collaboration|email|file_exchange|blog|journal|wiki|my_scholar_home|scholar_course_home
 #
-ASC.ADVISING|FRESHMEN-ASC.ADVISING|Freshmen|Freshmen in Arts and Sciences|Y|N|N|N|N
-ASC.ADVISING|SOPHOMORES-ASC.ADVISING|Sophomores|Sophomores in Arts and Sciences|Y|N|N|N|N
-CHEM.ASC.ADVISING|AJONES2-CHEM.ASC.ADVISING|Advisor  Adam Jones|Adam Joness Advisees|Y|Y|Y|Y|Y
-CHEM.ASC.ADVISING|SSMITH3-CHEM.ASC.ADVISING|Advisor  Sarah Smith|Sarah Smiths Advisees|Y|Y|Y|Y|Y
+ASC.ADVISING|FRESHMEN-ASC.ADVISING|Freshmen|Freshmen in Arts and Sciences|Y|N|N|N|N|N|N|N|N|N
+ASC.ADVISING|SOPHOMORES-ASC.ADVISING|Sophomores|Sophomores in Arts and Sciences|Y|N|N|N|N|N|N|N|N|N
+CHEM.ASC.ADVISING|AJONES2-CHEM.ASC.ADVISING|Advisor  Adam Jones|Adam Joness Advisees|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y
+CHEM.ASC.ADVISING|SSMITH3-CHEM.ASC.ADVISING|Advisor  Sarah Smith|Sarah Smiths Advisees|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y

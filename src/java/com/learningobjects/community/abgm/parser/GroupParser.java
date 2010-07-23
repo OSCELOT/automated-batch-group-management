@@ -17,8 +17,6 @@ package com.learningobjects.community.abgm.parser;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.learningobjects.community.abgm.container.LoggerFactory;
 import com.learningobjects.community.abgm.data.GroupRecord;
@@ -36,6 +34,11 @@ import com.learningobjects.community.abgm.data.GroupRecord;
  * <li>collaboration</li>
  * <li>email</li>
  * <li>file</li>
+ * <li>(optional) blog</li>
+ * <li>(optional) journal</li>
+ * <li>(optional) wiki</li>
+ * <li>(optional) my_scholar_home</li>
+ * <li>(optional) scholar_course_home</li>
  * </ul>
  * <br/>
  * These fields should be delimited by a pipe. Comments may begin with a # as the first character in the line.<br/>
@@ -47,10 +50,6 @@ import com.learningobjects.community.abgm.data.GroupRecord;
 public class GroupParser {
 
 	private final File dataFile;
-	/** Starts with a #, anything to the end */
-	private final static Pattern commentPattern = Pattern.compile("^#.*$");
-	private final static Pattern linePattern = Pattern
-			.compile("^(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)\\|(.*)$");
 	/** A Map of CourseId to Sets of GroupRecords */
 	private final Map<String, Set<GroupRecord>> byCourse;
 	private final Logger logger = LoggerFactory.getLogger();
@@ -133,27 +132,36 @@ public class GroupParser {
 
 		final BufferedReader in = new BufferedReader(new FileReader(dataFile));
 
-		String aLine = in.readLine();
-		while (aLine != null) {
-			final Matcher lineMatcher = linePattern.matcher(aLine);
-			final Matcher commentMatcher = commentPattern.matcher(aLine);
-
-			if (aLine.length() == 0 || commentMatcher.matches()) {
+		String aLine;
+		do {
+			aLine = in.readLine();
+			if (null == aLine || aLine.length() == 0 || aLine.startsWith("#")) {
 				// Do nothing
-			} else if (lineMatcher.matches()) {
+				continue;
+			}
+
+			String[] lineParts = aLine.split("\\|");
+			if (lineParts.length == 9 || lineParts.length == 14) {
 				final GroupRecord aRecord = new GroupRecord();
-
-				final String courseId = lineMatcher.group(1);
-
+				final String courseId = lineParts[0];
 				aRecord.setCourseId(courseId);
-				aRecord.setExternalGroupKey(lineMatcher.group(2));
-				aRecord.setTitle(lineMatcher.group(3));
-				aRecord.setDescription(lineMatcher.group(4));
-				aRecord.setIsAvailable(parseBoolean(lineMatcher.group(5)));
-				aRecord.setIsDiscussionBoardAvailable(parseBoolean(lineMatcher.group(6)));
-				aRecord.setIsChatRoomAvailable(parseBoolean(lineMatcher.group(7)));
-				aRecord.setIsEmailAvailable(parseBoolean(lineMatcher.group(8)));
-				aRecord.setIsTransferAreaAvailable(parseBoolean(lineMatcher.group(9)));
+				aRecord.setExternalGroupKey(lineParts[1]);
+				aRecord.setTitle(lineParts[2]);
+				aRecord.setDescription(lineParts[3]);
+				aRecord.setIsAvailable(parseBoolean(lineParts[4]));
+				aRecord.setIsDiscussionBoardAvailable(parseBoolean(lineParts[5]));
+				aRecord.setIsChatRoomAvailable(parseBoolean(lineParts[6]));
+				aRecord.setIsEmailAvailable(parseBoolean(lineParts[7]));
+				aRecord.setIsTransferAreaAvailable(parseBoolean(lineParts[8]));
+
+				// Optional extra fields added in ABGM 1.2
+				if (lineParts.length == 14) {
+					aRecord.setBlogAvailable(parseBoolean(lineParts[9]));
+					aRecord.setJournalAvailable(parseBoolean(lineParts[10]));
+					aRecord.setWikiAvailable(parseBoolean(lineParts[11]));
+					aRecord.setMyScholarHomeAvailable(parseBoolean(lineParts[12]));
+					aRecord.setScholarCourseHomeAvailable(parseBoolean(lineParts[13]));
+				}
 
 				Set<GroupRecord> addTo = toReturn.get(courseId);
 				if (addTo == null) {
@@ -166,9 +174,7 @@ public class GroupParser {
 			} else {
 				throw new ParseException("Cannot parse: (" + aLine + ")");
 			}
-
-			aLine = in.readLine();
-		}
+		} while (null != aLine);
 
 		return toReturn;
 	}

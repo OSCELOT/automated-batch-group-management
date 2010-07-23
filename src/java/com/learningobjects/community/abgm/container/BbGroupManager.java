@@ -187,13 +187,7 @@ public class BbGroupManager {
 
 			toReturn = new Group();
 			toReturn.setCourseId(theCourse.getId());
-			toReturn.setIsAvailable(groupRecord.getIsAvailable());
-			toReturn.setIsChatRoomAvailable(groupRecord.getIsChatRoomAvailable());
-			toReturn.setIsDiscussionBoardAvailable(groupRecord.getIsDiscussionBoardAvailable());
-			toReturn.setIsEmailAvailable(groupRecord.getIsEmailAvailable());
-			toReturn.setIsTransferAreaAvailable(groupRecord.getIsTransferAreaAvailable());
-			toReturn.setTitle(groupRecord.getTitle());
-			toReturn.setDescription(new FormattedText(groupRecord.getDescription(), FormattedText.Type.PLAIN_TEXT));
+			setGroupProperties(groupRecord, toReturn);
 
 			final GroupDbPersister persister = GroupDbPersister.Default.getInstance();
 			synchronized (groupMap) {
@@ -231,16 +225,39 @@ public class BbGroupManager {
 			return;
 		}
 
-		theGroup.setIsAvailable(groupRecord.getIsAvailable());
-		theGroup.setIsChatRoomAvailable(groupRecord.getIsChatRoomAvailable());
-		theGroup.setIsDiscussionBoardAvailable(groupRecord.getIsDiscussionBoardAvailable());
-		theGroup.setIsEmailAvailable(groupRecord.getIsEmailAvailable());
-		theGroup.setIsTransferAreaAvailable(groupRecord.getIsTransferAreaAvailable());
-		theGroup.setTitle(groupRecord.getTitle());
-		theGroup.setDescription(new FormattedText(groupRecord.getDescription(), FormattedText.Type.PLAIN_TEXT));
+		setGroupProperties(groupRecord, theGroup);
 		final GroupDbPersister persister = GroupDbPersister.Default.getInstance();
 		persister.persist(theGroup);
 
+	}
+
+	/**
+	 * Applies the GroupRecord's properties to the specified Group.
+	 * 
+	 * @param groupRecord Record to read properties from
+	 * @param group Group to apply properties to.
+	 */
+	private void setGroupProperties(GroupRecord groupRecord, Group group) {
+		group.setIsAvailable(groupRecord.getIsAvailable());
+		group.setIsChatRoomAvailable(groupRecord.getIsChatRoomAvailable());
+		group.setIsDiscussionBoardAvailable(groupRecord.getIsDiscussionBoardAvailable());
+		group.setIsEmailAvailable(groupRecord.getIsEmailAvailable());
+		group.setIsTransferAreaAvailable(groupRecord.getIsTransferAreaAvailable());
+		group.setTitle(groupRecord.getTitle());
+		group.setDescription(new FormattedText(groupRecord.getDescription(), FormattedText.Type.PLAIN_TEXT));
+
+		addOrRemoveAvailableTool(group, "blogs", groupRecord.isBlogAvailable());
+		addOrRemoveAvailableTool(group, "journal", groupRecord.isJournalAvailable());
+		addOrRemoveAvailableTool(group, "Bb-wiki", groupRecord.isWikiAvailable());
+		addOrRemoveAvailableTool(group, "Bb-ScholarUser", groupRecord.isMyScholarHomeAvailable());
+		addOrRemoveAvailableTool(group, "Bb-ScholarCrs", groupRecord.isScholarCourseHomeAvailable());
+	}
+
+	private void addOrRemoveAvailableTool(Group group, String toolHandle, boolean isToolAvailable) {
+		if (isToolAvailable)
+			group.addAvailableTool(toolHandle);
+		else
+			group.removeAvailableTool(toolHandle);
 	}
 
 	/**
