@@ -39,8 +39,6 @@ import com.learningobjects.community.abgm.data.GroupRecord;
 public class BbGroupManager {
 	/** The file that BbGroupManager should save its cached information to */
 	private final File store;
-	/** Used in groupMap */
-	private final static String DELIM = "^";
 	/**
 	 * Map GroupRecord keys from data file to Id objects to account for changing titles of Groups.
 	 */

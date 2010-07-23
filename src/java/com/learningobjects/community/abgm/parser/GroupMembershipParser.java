@@ -40,7 +40,6 @@ import com.learningobjects.community.abgm.data.GroupMembershipRecord;
  */
 public class GroupMembershipParser {
 
-	private final File dataFile;
 	/** Starts with a #, anything to the end */
 	private final static Pattern commentPattern = Pattern.compile("^#.*$");
 	private final static Pattern linePattern = Pattern.compile("^(.*)\\|(.*)\\|(.*)$");
@@ -58,7 +57,6 @@ public class GroupMembershipParser {
 	 * @exception ParseException Description of the Exception
 	 */
 	public GroupMembershipParser(final File dataFile) throws IOException, ParseException {
-		this.dataFile = dataFile;
 		byCourse = new TreeMap();
 		byGroup = new TreeMap();
 
