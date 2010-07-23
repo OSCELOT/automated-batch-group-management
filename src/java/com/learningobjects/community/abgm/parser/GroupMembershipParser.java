@@ -169,16 +169,6 @@ public class GroupMembershipParser {
 	}
 
 	/**
-	 * Parse a possible boolean value from a String.
-	 * 
-	 * @param s The String to examine
-	 * @return <code>true</code> iff s represents a "true" value
-	 */
-	private boolean parseBoolean(String s) {
-		return s.compareToIgnoreCase("y") == 0;
-	}
-
-	/**
 	 * Parse a group file and spit out the results.
 	 * 
 	 * @param args One parameter of the file name.
