@@ -16,10 +16,12 @@ package com.learningobjects.community.abgm.parser;
 
 import java.io.*;
 import java.util.*;
-import java.util.logging.*;
-import java.util.regex.*;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.learningobjects.community.abgm.container.LoggerFactory;
-import com.learningobjects.community.abgm.data.*;
+import com.learningobjects.community.abgm.data.GroupMembershipRecord;
 
 /**
  * Parses a group membership definition file. We assume that the file will have the following fields:<br/>

@@ -14,10 +14,8 @@
  */
 package com.learningobjects.community.abgm.config;
 
-import java.util.*;
 import java.io.*;
-
-import com.learningobjects.community.abgm.container.LoggerFactory;
+import java.util.Properties;
 
 public class SystemProperties extends Properties {
 

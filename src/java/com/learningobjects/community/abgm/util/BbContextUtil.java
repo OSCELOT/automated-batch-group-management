@@ -1,19 +1,19 @@
 package com.learningobjects.community.abgm.util;
 
-import com.learningobjects.community.abgm.container.*;
-
-import blackboard.platform.BbServiceManager;
-import blackboard.platform.context.ContextManager;
-import blackboard.platform.vxi.data.VirtualHost;
-import blackboard.platform.vxi.service.VirtualInstallationManager;
-import blackboard.platform.vxi.data.VirtualInstallation;
-import blackboard.platform.BbServiceException;
-import blackboard.base.InitializationException;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 
-import java.util.logging.*;
-import java.io.*;
+import blackboard.base.InitializationException;
+import blackboard.platform.BbServiceException;
+import blackboard.platform.BbServiceManager;
+import blackboard.platform.context.ContextManager;
+import blackboard.platform.vxi.data.VirtualInstallation;
+import blackboard.platform.vxi.service.VirtualInstallationManager;
+
+import com.learningobjects.community.abgm.container.LoggerFactory;
 
 public class BbContextUtil {
 

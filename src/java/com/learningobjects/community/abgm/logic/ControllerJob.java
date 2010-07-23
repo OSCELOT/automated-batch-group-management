@@ -14,30 +14,22 @@
  */
 package com.learningobjects.community.abgm.logic;
 
-import org.quartz.*;
-
-import com.learningobjects.community.abgm.config.*;
-import com.learningobjects.community.abgm.container.*;
-import com.learningobjects.community.abgm.util.*;
-
 import java.io.*;
-import java.util.logging.*;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import blackboard.platform.context.ContextManager;
-import blackboard.platform.vxi.data.VirtualHost;
-import blackboard.platform.vxi.data.VirtualInstallation;
-import blackboard.platform.vxi.service.VirtualInstallationManager;
-import blackboard.platform.BbServiceManager;
-import blackboard.platform.BbServiceException;
-import blackboard.base.InitializationException;
-
-import org.apache.commons.vfs.FileSystemManager;
-import org.apache.commons.vfs.FileObject;
-import org.apache.commons.vfs.FileContent;
-import org.apache.commons.vfs.VFS;
-import org.apache.commons.vfs.FileSystemOptions;
+import org.apache.commons.vfs.*;
 import org.apache.commons.vfs.provider.sftp.SftpFileSystemConfigBuilder;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+
+import blackboard.base.InitializationException;
+import blackboard.platform.BbServiceException;
+
+import com.learningobjects.community.abgm.config.SystemProperties;
+import com.learningobjects.community.abgm.container.LoggerFactory;
+import com.learningobjects.community.abgm.util.BbContextUtil;
 
 public class ControllerJob implements Job {
 

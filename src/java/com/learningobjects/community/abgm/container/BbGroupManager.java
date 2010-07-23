@@ -14,22 +14,20 @@
  */
 package com.learningobjects.community.abgm.container;
 
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import blackboard.base.FormattedText;
-import blackboard.data.*;
+import blackboard.data.ValidationException;
 import blackboard.data.course.*;
-import blackboard.data.user.*;
+import blackboard.data.user.User;
 import blackboard.persist.*;
 import blackboard.persist.course.*;
-import blackboard.persist.user.*;
+import blackboard.persist.user.UserDbLoader;
 
-import com.learningobjects.community.abgm.container.LoggerFactory;
-import com.learningobjects.community.abgm.data.*;
+import com.learningobjects.community.abgm.data.GroupRecord;
 
 /**
  * An interface to the Blacboard course persisters for managing groups and memberships. <br/>

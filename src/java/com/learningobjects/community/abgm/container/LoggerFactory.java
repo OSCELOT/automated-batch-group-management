@@ -14,7 +14,8 @@
  */
 package com.learningobjects.community.abgm.container;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.*;
 
 import com.learningobjects.community.abgm.config.SystemProperties;
