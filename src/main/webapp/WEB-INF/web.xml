@@ -20,16 +20,6 @@
   <servlet-mapping>
      <servlet-name>ConfigServlet</servlet-name>
      <url-pattern>/ConfigServlet</url-pattern>
-  </servlet-mapping>  
-  
-	<taglib>
-		<taglib-uri>/bbUI</taglib-uri>
-		<taglib-location>/WEB-INF/taglibs/bbUI.tld</taglib-location>
-	</taglib>
-	
-	<taglib>
-		<taglib-uri>/bbData</taglib-uri>
-		<taglib-location>/WEB-INF/taglibs/bbData.tld</taglib-location>
-	</taglib>
+  </servlet-mapping>
 
 </web-app>

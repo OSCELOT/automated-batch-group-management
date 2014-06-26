@@ -1,0 +1,59 @@
+apply plugin: "java"
+apply plugin: "war"
+apply plugin: "maven"
+apply plugin: "eclipse"
+apply plugin: "idea"
+
+// define the version for the project when publishing to maven
+group "org.oscelot"
+version "1.2.8"
+
+ext {
+  learnVersion = "9.1.100401.0"
+  deployServer = "localhost:8000"
+  deployInstance = "BBLEARN"
+}
+
+repositories {
+  mavenCentral()
+  maven {
+    url "https://maven.blackboard.com/content/repositories/releases/"
+  }
+}
+
+configurations {
+  buildUtils
+}
+
+// define the project's dependencies
+dependencies {
+  providedCompile "javax.servlet:servlet-api:2.5",
+                  "javax.servlet.jsp:jsp-api:2.1"
+
+  compile "commons-httpclient:commons-httpclient:2.0.2",
+          "commons-lang:commons-lang:2.4",
+          "commons-logging:commons-logging:1.1.1",
+          "commons-net:commons-net:1.4.1",
+          "commons-vfs:commons-vfs:1.0",
+          "oro:oro:2.0.8",
+          "com.jcraft:jsch:0.1.41",
+          "quartz:quartz:1.4.5"
+
+  // Dependencies are libraries needed to build, but should not be included in the B2 WAR.
+  providedCompile( "blackboard.platform:bb-platform:$ext.learnVersion" ) { transitive = false }
+  providedCompile( "blackboard.platform:bb-taglibs:$ext.learnVersion" ) { transitive = false }
+
+  testCompile "junit:junit:4.11"
+
+  buildUtils "org.oscelot:b2deploy-task:0.1.0"
+}
+
+// Add a task to deploy a B2 using starting block
+task deployB2( dependsOn: "war" ) << {
+      ant.taskdef( name: "b2deploy", classname: "org.oscelot.ant.B2DeployTask", classpath: project.configurations.buildUtils.asPath )
+      ant.b2deploy( localfilepath: project.war.archivePath, host: project.ext.deployServer, courseorgavailable: 'true', clean: 'true', webappName: 'bb-starting-block-' + project.ext.deployInstance )
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.6'
+}
