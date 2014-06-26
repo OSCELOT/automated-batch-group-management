@@ -7,5 +7,5 @@
 #
 ASC.ADVISING|FRESHMEN-ASC.ADVISING|Freshmen|Freshmen in Arts and Sciences|Y|N|N|N|N|N|N|N|N|N|N
 ASC.ADVISING|SOPHOMORES-ASC.ADVISING|Sophomores|Sophomores in Arts and Sciences|Y|N|N|N|N|N|N|N|N|N|N
-CHEM.ASC.ADVISING|AJONES2-CHEM.ASC.ADVISING|Advisor  Adam Jones|Adam Joness Advisees|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y
-CHEM.ASC.ADVISING|SSMITH3-CHEM.ASC.ADVISING|Advisor  Sarah Smith|Sarah Smiths Advisees|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y
+CHEM.ASC.ADVISING|AJONES2-CHEM.ASC.ADVISING|Advisor - Adam Jones|Adam Jones's Advisees|Y|Y|Y|Y|Y|Y|N|Y|Y|Y|Y
+CHEM.ASC.ADVISING|SSMITH3-CHEM.ASC.ADVISING|Advisor - Sarah Smith|Sarah Smith's Advisees|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y
