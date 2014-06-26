@@ -25,8 +25,6 @@ public class GroupRecord {
   private boolean _isBlogAvailable;
   private boolean _isJournalAvailable;
   private boolean _isWikiAvailable;
-  private boolean _isMyScholarHomeAvailable;
-  private boolean _isScholarCourseHomeAvailable;
   private boolean _isCustomizable;
 
   public String getExternalGroupKey() {
@@ -125,22 +123,6 @@ public class GroupRecord {
     _isWikiAvailable = isWikiAvailable;
   }
 
-  public boolean isMyScholarHomeAvailable() {
-    return _isMyScholarHomeAvailable;
-  }
-
-  public void setMyScholarHomeAvailable(boolean isMyScholarHomeAvailable) {
-    _isMyScholarHomeAvailable = isMyScholarHomeAvailable;
-  }
-
-  public boolean isScholarCourseHomeAvailable() {
-    return _isScholarCourseHomeAvailable;
-  }
-
-  public void setScholarCourseHomeAvailable(boolean isScholarCourseHomeAvailable) {
-    _isScholarCourseHomeAvailable = isScholarCourseHomeAvailable;
-  }
-
   public void setCustomizable(boolean isCustomizable) {
     _isCustomizable = isCustomizable;
   }
@@ -164,8 +146,6 @@ public class GroupRecord {
     sb.append(", isBlogAvailable=").append(_isBlogAvailable);
     sb.append(", isJournalAvailable=").append(_isJournalAvailable);
     sb.append(", isWikiAvailable=").append(_isWikiAvailable);
-    sb.append(", isMyScholarHomeAvailable=").append(_isMyScholarHomeAvailable);
-    sb.append(", isScholarCourseHomeAvailable=").append(_isScholarCourseHomeAvailable);
     sb.append(", isCustomizable=").append(_isCustomizable);
     sb.append("]");
     return sb.toString();

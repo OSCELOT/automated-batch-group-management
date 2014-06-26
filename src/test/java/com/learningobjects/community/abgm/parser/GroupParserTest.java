@@ -74,8 +74,6 @@ public class GroupParserTest extends TestCase {
     assertEquals(isBlog, groupRecord.isBlogAvailable());
     assertEquals(isJournal, groupRecord.isJournalAvailable());
     assertEquals(isWiki, groupRecord.isWikiAvailable());
-    assertEquals(isMyScholar, groupRecord.isMyScholarHomeAvailable());
-    assertEquals(isScholarCourse, groupRecord.isScholarCourseHomeAvailable());
     assertEquals(isCustomizable, groupRecord.isCustomizable());
   }
 }

@@ -34,8 +34,8 @@ import com.learningobjects.community.abgm.data.GroupRecord;
  *   <li>(optional) blog</li>
  *   <li>(optional) journal</li>
  *   <li>(optional) wiki</li>
- *   <li>(optional) my_scholar_home</li>
- *   <li>(optional) scholar_course_home</li>
+ *   <li>(deprecated) my_scholar_home</li>
+ *   <li>(deprecated) scholar_course_home</li>
  *   <li>(optional) personalization</li>
  * </ul>
  * <p/>
@@ -156,10 +156,12 @@ public class GroupParser {
           aRecord.setJournalAvailable(parseBoolean(lineParts[10]));
         if (lineParts.length >= 12)
           aRecord.setWikiAvailable(parseBoolean(lineParts[11]));
-        if (lineParts.length >= 13)
-          aRecord.setMyScholarHomeAvailable(parseBoolean(lineParts[12]));
-        if (lineParts.length >= 14)
-          aRecord.setScholarCourseHomeAvailable(parseBoolean(lineParts[13]));
+        if (lineParts.length >= 13) {
+          // ignore: this field held the deprecated my_scholar_home attribute
+        }
+        if (lineParts.length >= 14) {
+          // ignore: this field held the deprecated scholar_course_home attribute
+        }
         if (lineParts.length >= 15)
           aRecord.setCustomizable(parseBoolean(lineParts[14]));
 
