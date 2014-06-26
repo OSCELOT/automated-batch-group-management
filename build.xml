@@ -41,7 +41,7 @@
     <property name="resources" location="resources" />
     <property name="distlib" location="distlib" />
 
-    <property name="version" value="1.2.7" />
+    <property name="version" value="1.2.8" />
     <property name="dist.name" value="${shortname}-${version}.${label}" />
     <property name="srcdist.zip" location="${dist}/${dist.name}-src.zip" />
 
