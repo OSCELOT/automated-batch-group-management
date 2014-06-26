@@ -32,6 +32,8 @@ public class BootstrapServlet extends HttpServlet {
   private static final int MAX_LOG_SIZE = 20 * 1024 * 1024;
   private static final int MAX_LOGS = 10;
 
+  private Scheduler scheduler;
+
   @Override
   public void init() throws ServletException {
     // read in system.properties
@@ -62,13 +64,18 @@ public class BootstrapServlet extends HttpServlet {
 
   @Override
   public void destroy() {
+    try {
+      scheduler.shutdown();
+    } catch (SchedulerException e) {
+      System.out.println(e.getMessage());
+    }
     super.destroy();
   }
 
   private void initQuartz() throws SchedulerException {
     // startup quartz
     SchedulerFactory schedulerFactory = new org.quartz.impl.StdSchedulerFactory();
-    Scheduler scheduler = schedulerFactory.getScheduler();
+    scheduler = schedulerFactory.getScheduler();
     scheduler.start();
     JobDetail jobDetail = new JobDetail("myJob", Scheduler.DEFAULT_GROUP, ControllerJob.class);
     try {
