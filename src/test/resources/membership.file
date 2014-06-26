@@ -3,7 +3,6 @@
 # Blank lines are ignored       Fields are delimeted with pipe symbols and whitespace is preserved.
 # Identifiers are case-sensitive
 #course_id|group_id|user_id  
-# $Id: membership.file 2525 2005-01-07 21:32:39Z rvawter $
 
 ASC.ADVISING|FRESHMEN-ASC.ADVISING|000983726
 ASC.ADVISING|FRESHMEN-ASC.ADVISING|002637829

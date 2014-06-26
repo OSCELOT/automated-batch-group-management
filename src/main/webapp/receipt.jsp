@@ -9,9 +9,6 @@
  * The Original Code is the ABGM Tool. The Initial Developer of the Original Code is Learning Objects, Inc. 
  *
  * Portions created by Initial Developer are Copyright(C) Learning Objects, Inc. All Rights Reserved.
- * 
- * Contributor(s):
- *
  */
  %>
 
