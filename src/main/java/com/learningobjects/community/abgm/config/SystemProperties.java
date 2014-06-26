@@ -14,35 +14,46 @@ package com.learningobjects.community.abgm.config;
 import java.io.*;
 import java.util.Properties;
 
-public class SystemProperties extends Properties {
+import blackboard.platform.plugin.PlugInException;
+import blackboard.platform.plugin.PlugInUtil;
 
+public class SystemProperties extends Properties {
   private static final long serialVersionUID = 4818290789593922705L;
-  private static SystemProperties _systemProperties = null;
-  private String _systemPropertiesPath = null;
+  private static SystemProperties INSTANCE;
+
+  private File _defaultProperties;
+  private File _properties;
 
   private SystemProperties() {
   }
 
   public static synchronized SystemProperties getInstance() {
-    if (_systemProperties == null) {
-      _systemProperties = new SystemProperties();
+    if (INSTANCE == null) {
+      INSTANCE = new SystemProperties();
     }
-    return _systemProperties;
+    return INSTANCE;
   }
 
-  public void init(String systemPropertiesPath) throws FileNotFoundException, IOException {
-    _systemPropertiesPath = systemPropertiesPath;
+  public void init(String systemPropertiesPath) throws IOException, PlugInException {
+    _defaultProperties = new File(systemPropertiesPath);
+    _properties = new File(PlugInUtil.getConfigDirectory("lobj", "abgm"), _defaultProperties.getName());
     load();
   }
 
-  public synchronized void load() throws FileNotFoundException, IOException {
-    FileInputStream fis = new FileInputStream(_systemPropertiesPath);
-    load(fis);
-    fis.close();
+  private synchronized void load() throws IOException {
+    try (FileInputStream fis = new FileInputStream(_defaultProperties)) {
+      load(fis);
+    }
+
+    if (_properties.exists()) {
+      try (FileInputStream fis = new FileInputStream(_properties)) {
+        load(fis);
+      }
+    }
   }
 
-  public synchronized void store() throws FileNotFoundException, IOException {
-    FileOutputStream fos = new FileOutputStream(_systemPropertiesPath);
+  public synchronized void store() throws IOException {
+    FileOutputStream fos = new FileOutputStream(_properties);
     store(fos, null);
     fos.close();
   }

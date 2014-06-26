@@ -11,8 +11,6 @@
  */
 package com.learningobjects.community.abgm.servlet;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.*;
 
@@ -50,13 +48,7 @@ public class BootstrapServlet extends HttpServlet {
       logger.info("BbContextUtil is initialized");
       initQuartz();
       logger.info("Quartz is initialized");
-    } catch (FileNotFoundException e) {
-      System.out.println("FATAL ERROR - " + e.getMessage());
-      throw new ServletException("Fatal error in bootstrap servlet", e);
-    } catch (IOException e) {
-      System.out.println("FATAL ERROR - " + e.getMessage());
-      throw new ServletException("Fatal error in bootstrap servlet", e);
-    } catch (SchedulerException e) {
+    } catch (Exception e) {
       System.out.println("FATAL ERROR - " + e.getMessage());
       throw new ServletException("Fatal error in bootstrap servlet", e);
     }
