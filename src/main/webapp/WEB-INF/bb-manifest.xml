@@ -47,6 +47,8 @@
        <permission type="persist" name="availablegrouptool" actions="create,modify,delete"/>
        <permission type="persist" name="wiki" actions="persist,create,modify,delete"/>
        <permission type="persist" name="blog" actions="persist,create,modify,delete"/>
+       <permission type="persist" name="tab" actions="persist,create,modify,delete"/>
+       <permission type="persist" name="layoutfamily" actions="persist,create,modify,delete"/>
     </permissions>
   </plugin>
 </manifest>
